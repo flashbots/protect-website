@@ -13,7 +13,7 @@ export default function Home() {
         'p-[17px] pr-[30px]',
       )}
     >
-      <div className="h-full w-[300px] bg-gray-500 rounded-[10px] shrink-0"></div>
+      <div className="h-full w-[320px] bg-gray-500 rounded-[10px] shrink-0"></div>
       <div
         className={classes(
           'flex flex-col justify-between py-[13px]',
@@ -22,12 +22,12 @@ export default function Home() {
         )}
       >
         <div>
-          <div className="text-[38px] font-medium leading-[41px] mb-[9px] max-w-[340px]">
+          <div className="text-[38px] font-medium leading-[41px] mb-[9px] tracking-[-0.76px]">
             A safer way to transact on Ethereum
           </div>
           <div
             className={classes(
-              'opacity-80 text-lg leading-snug font-normal max-w-[290px]',
+              'opacity-80 text-lg leading-[22px] font-normal max-w-[290px] tracking-[-0.36px]',
             )}
           >
             Use Flashbots Protect to protect yourself from frontrunning and earn
@@ -46,23 +46,23 @@ export default function Home() {
             Get Protected
           </Button>
           <div className="flex flex-row items-center gap-[21px]">
-            <div className="flex-1">
-              <div className="text-white text-opacity-60 text-[16px] font-normal mb-3">
+            <div className="">
+              <div className="text-white text-opacity-60 text-[16px] font-normal mb-3 tracking-[-0.32px] leading-[18px]">
                 Transactions processed
               </div>
-              <div className="text-[25px] font-[500]">
+              <div className="text-[25px] font-[500] tracking-[-0.5px] leading-[18px]">
                 <span className="opacity-80">&gt;</span>
                 <span className="">6.8</span>
                 <span className="opacity-80"> million</span>
               </div>
             </div>
             <div className="bg-white bg-opacity-10 w-[1px] h-[59px]"></div>
-            <div className="flex-1">
-              <div className="text-white text-opacity-60 text-[16px] font-normal mb-3">
+            <div className="">
+              <div className="text-white text-opacity-60 text-[16px] font-normal mb-3 tracking-[-0.32px] leading-[18px]">
                 Refunds earned
               </div>
               <div>
-                <div className="text-[25px] font-[500]">
+                <div className="text-[25px] font-[500] tracking-[-0.5px] leading-[18px]">
                   <span className="opacity-80">&gt;</span>
                   <span className="">100</span>
                   <span className="opacity-80">ETH</span>
