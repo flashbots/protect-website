@@ -35,9 +35,9 @@ export default function Home() {
           </div>
         </div>
         <div className="leading-[18px]">
-          <Button type="primary-white" className="mb-[23px]">
+          <Button type="primary-white" className="mb-[23px]" href={'/start'}>
             <Image
-              src="/play-icon.svg"
+              src="/icons/play-icon.svg"
               height={20}
               width={20}
               alt="play"

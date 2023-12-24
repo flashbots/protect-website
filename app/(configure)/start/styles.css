@@ -1,9 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-body {
-  background-image: url("/icons/background-dot.svg");
+.fast-mode-option {
+  background-image: url("/icons/background-square.svg");
   background-repeat: repeat;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
