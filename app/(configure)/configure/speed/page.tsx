@@ -1,13 +1,33 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+
 import Image from 'next/image';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
+import { useSupportedBuilders } from '@/components/builders/useSupportedBuilders';
+import { Button } from '@/components/buttons/Button';
 import { LearnMore } from '@/components/buttons/LearnMore';
-import { DescriptionPanel } from '@/components/DescriptionPanel';
-import { ArrowRight } from '@/components/icons/ArrowRight';
+import { clickableClasses } from '@/components/buttons/styling';
+import { DescriptionPanel } from '@/components/description/DescriptionPanel';
+import { Checkbox } from '@/components/inputs/Checkbox';
 import { DescriptionText } from '@/components/text/DescriptionText';
+import { FormHint } from '@/components/text/FormHint';
 import { classes } from '@/lib/classes';
+import { alwaysSelectedBuilders, useURLState } from '@/lib/useURLState';
 
-export default function Start() {
+export default function Speed() {
+  const supportedBuilders = useSupportedBuilders();
+  const [selectAllBuilders, setSelectAllBuilders] = useState<boolean>(false);
+  const router = useRouter();
+  const { backToSummary, urlParams, builders, setBuilders } = useURLState();
+
+  useEffect(() => {
+    if (selectAllBuilders) {
+      setBuilders(supportedBuilders.map((builder) => builder.name));
+    }
+  }, [selectAllBuilders, supportedBuilders, setBuilders]);
+
   return (
     <>
       <DescriptionPanel
@@ -16,6 +36,7 @@ export default function Start() {
           activeIndex: 0,
           totalDots: 4,
         }}
+        backHref={backToSummary ? '/summary' : '/start'}
       >
         <DescriptionText>
           How quickly your transactions are confirmed onchain is determined by
@@ -29,61 +50,79 @@ export default function Start() {
           them not to frontrun your transaction or disclose it to third parties
           who might.
         </DescriptionText>
-        <LearnMore href="/" />
+        <LearnMore href="https://docs.flashbots.net/flashbots-protect/mev-share#builders" />
       </DescriptionPanel>
 
       <div
-        className={classes(
-          'flex flex-col grow bg-[#D9D9D9] bg-opacity-20 pt-[18px] px-[22px]',
-        )}
+        className={classes('flex flex-col grow pt-[18px] px-[20px] pb-[19px]')}
       >
-        <div className="opacity-50 text-black text-[17px] font-normal leading-[33px] tracking-[-0.34px] mx-[6px] mb-[14px]">
-          Select setup mode
-        </div>
-
-        <Link href="/finalize?fast=true">
-          <div
-            className={classes(
-              'fast-mode-option bg-black rounded-[8px] p-[20px] pb-[15px] mb-[15px]',
-              'cursor-pointer transition-all ring-0 hover:ring-2 ring-gray-300',
-            )}
-          >
-            <div className="flex flex-row justify-between items-center text-white">
-              <Image
-                src="/icons/lightning-icon.svg"
-                alt="lightning"
-                height={24}
-                width={24}
-              />
-              <ArrowRight />
-            </div>
-            <div className="text-white text-[29px] font-medium leading-[18px] tracking-[-0.58px] mt-[24px] mb-[8px]">
-              Fast
-            </div>
-            <div className="opacity-80 text-white text-base font-normal leading-[22px] tracking-[-0.32px] ">
-              Optimized for speed. Works well for most.
-            </div>
-          </div>
-        </Link>
-
+        <FormHint className="mb-[6px]">Select builders</FormHint>
         <div
           className={classes(
-            'bg-white rounded-[8px] pt-[17px] px-[20px] pb-[13px] border border-black border-opacity-15',
-            'flex flex-row justify-between items-center',
-            'text-black',
-            'group hover:border-opacity-30 cursor-pointer transition-all',
+            'flex flex-row items-center justify-between',
+            'rounded-[8px] border border-black border-opacity-10 p-[14px] pl-[16px]',
+            'mb-[22px]',
+            clickableClasses,
           )}
         >
-          <div>
-            <div className="text-black text-2xl font-medium tracking-[-0.48px] leading-[18px] mb-[6px]">
-              Custom
+          <Checkbox checked={selectAllBuilders} onChange={setSelectAllBuilders}>
+            <div className="text-black text-[20px] font-medium leading-[18px] tracking-[-0.4px] ml-[12px]">
+              Send to all builders
             </div>
-            <div className="opacity-80 text-black text-base font-normal tracking-[-0.32px] leading-[22px]">
-              For users with unique needs.
-            </div>
-          </div>
-          <ArrowRight className="opacity-30 group-hover:opacity-50 transition-all" />
+          </Checkbox>
+          <Image
+            src="/icons/question-icon.svg"
+            height={20}
+            width={20}
+            alt="question"
+            className="opacity-30 hover:opacity-80 cursor-pointer transition-all"
+          />
         </div>
+        <div className="flex flex-col flex-wrap gap-y-[14px] gap-x-[24px] overflow-scroll pl-[8px]">
+          {supportedBuilders.map((builder) => (
+            <div key={builder.name}>
+              <Checkbox
+                checked={builders.includes(builder.name)}
+                onChange={(checked) => {
+                  if (checked) {
+                    setBuilders((prev) => [...prev, builder.name]);
+                  } else {
+                    setBuilders((prev) =>
+                      prev.filter((name) => name !== builder.name),
+                    );
+                  }
+                }}
+                disabled={
+                  alwaysSelectedBuilders.includes(builder.name) ||
+                  selectAllBuilders
+                }
+              >
+                <div
+                  className={classes(
+                    'text-black text-[18px] font-normal leading-[22px] tracking-[-0.32px] ml-[9px]',
+                    builders.includes(builder.name)
+                      ? 'opacity-100'
+                      : 'opacity-50',
+                  )}
+                >
+                  {builder.name}
+                </div>
+              </Checkbox>
+            </div>
+          ))}
+        </div>
+        <Button
+          className="mt-[32px]"
+          onClick={() => {
+            router.push(
+              backToSummary
+                ? `/summary?${urlParams}`
+                : `/configure/privacy?${urlParams}`,
+            );
+          }}
+        >
+          Confirm
+        </Button>
       </div>
     </>
   );

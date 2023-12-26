@@ -4,18 +4,27 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 import { classes } from '@/lib/classes';
+import { useURLState } from '@/lib/useURLState';
 
-export const BackButton = () => {
+import { clickableClasses } from './styling';
+
+export const BackButton = ({ href }: { href?: string }) => {
   const router = useRouter();
+  const { urlParams } = useURLState();
   return (
     <div
       className={classes(
-        'rounded-full w-[35px] h-[35px] border border-black border-opacity-15 flex flex-row items-center justify-center opacity-50',
+        'rounded-full w-[35px] h-[35px] border border-black border-opacity-15 flex flex-row items-center justify-center',
         'cursor-pointer',
-        'transition-all hover:border-opacity-30 hover:opacity-[0.7]',
+        clickableClasses,
+        'opacity-50 hover:opacity-70',
       )}
       onClick={() => {
-        router.back();
+        if (href) {
+          router.push(`${href}?${urlParams}`);
+        } else {
+          router.back();
+        }
       }}
     >
       <Image height={14} width={8} src="/icons/caret-left.svg" alt="back" />

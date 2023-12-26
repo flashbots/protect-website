@@ -16,17 +16,19 @@ export const Button = ({
   onClick?: () => void;
   href?: string;
   className?: string;
-  type?: 'primary-black' | 'primary-white';
+  type?: 'primary-black' | 'primary-white' | 'secondary';
   style?: CSSProperties;
 }) => {
   const buttonClasses = classes(
     'w-full rounded-[8px]',
     'transition-all',
-    'p-[9px] text-[20px] h-[46px]',
+    'text-[20px] shrink-0',
     'font-medium',
     'border',
-    type === 'primary-black' && 'border-black bg-black text-white',
-    type === 'primary-white' && 'bg-black bg-white text-black',
+    type === 'primary-black' && 'border-black bg-black text-white h-[46px]',
+    type === 'primary-white' && 'bg-black bg-white text-black h-[46px]',
+    type === 'secondary' &&
+      'border-black bg-white text-black h-[39px] border-opacity-10',
     'leading-[18px]',
     'flex flex-row items-center justify-center',
   );

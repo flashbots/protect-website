@@ -2,20 +2,17 @@ import { ReactNode } from 'react';
 
 import { classes } from '@/lib/classes';
 
-export const DescriptionText = ({
-  textOpacityClass = 'text-opacity-80',
-  className,
+export const FormHint = ({
   children,
+  className,
 }: {
-  textOpacityClass?: string;
-  className?: string;
   children: ReactNode;
+  className: string;
 }) => {
   return (
     <div
       className={classes(
-        'text-black text-[19px] tracking-[-0.38px] leading-[22px] mb-[11px]',
-        textOpacityClass,
+        'opacity-50 text-black text-[17px] font-normal leading-[33px] tracking-[-0.34px] mx-[6px]',
         className,
       )}
     >
