@@ -173,7 +173,7 @@ export default function Summary() {
                   params: [addChainParams],
                 })
                 .catch((error: any) => {
-                  alert(`addChain failed: ${error}`);
+                  alert(`addChain failed: ${JSON.stringify(error)}`);
                 });
             } else {
               alert('Metamask not found');
