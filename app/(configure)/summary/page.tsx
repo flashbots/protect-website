@@ -173,7 +173,10 @@ export default function Summary() {
                   params: [addChainParams],
                 })
                 .catch((error: any) => {
-                  alert(`addChain failed: ${JSON.stringify(error)}`);
+                  // ignore 4001 "user rejected request" error code
+                  if (error.code !== 4001) {
+                    alert(`Error ${error.code}: ${error.message}`);
+                  }
                 });
             } else {
               alert('Metamask not found');
