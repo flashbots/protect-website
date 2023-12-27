@@ -173,10 +173,10 @@ export default function Summary() {
                   params: [addChainParams],
                 })
                 .catch((error: any) => {
-                  console.error('addChain failed', error);
+                  alert(`addChain failed: ${error}`);
                 });
             } else {
-              console.error('ethereum provider not found');
+              alert('Metamask not found');
             }
           }}
         >
