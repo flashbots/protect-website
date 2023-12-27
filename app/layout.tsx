@@ -19,7 +19,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           fontCalibre.className,
           'h-dvh w-screen flex flex-col',
           'justify-end sm:justify-center items-center',
-          'px-[20px] py-[28px]',
+          'px-[20px] py-[20px]',
           'max-h-dvh overflow-hidden',
         )}
       >

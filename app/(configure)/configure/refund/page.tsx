@@ -89,9 +89,12 @@ export default function Refund() {
               'appearance-none',
               'absolute top-0',
               'bg-transparent',
-              '[&::-webkit-slider-thumb]:appearance-none [&::-moz-range-thumb]:appearance-none ',
+              '[&::-webkit-slider-thumb]:appearance-none [&::-moz-range-thumb]:appearance-none',
               '[&::-webkit-slider-thumb]:w-[60px] [&::-moz-range-thumb]:w-[60px]',
               '[&::-webkit-slider-thumb]:h-[33px] [&::-moz-range-thumb]:h-[33px]',
+              '[&::-webkit-slider-thumb]:rounded-md [&::-moz-range-thumb]:rounded-md',
+              '[&::-webkit-slider-thumb]:bg-transparent [&::-moz-range-thumb]:bg-transparent',
+              '[&::-webkit-slider-thumb]:shadow-0 [&::-moz-range-thumb]:shadow-0',
               'cursor-pointer',
             )}
             value={refundShare}
