@@ -6,9 +6,11 @@ export default function ConfigureLayout({ children }: { children: ReactNode }) {
   return (
     <div
       className={classes(
-        'w-[673px] h-[409px] bg-white rounded-[10px]',
-        'flex flex-row',
-        'border border-black border-opacity-15',
+        'w-full sm:w-[673px] sm:h-[409px] rounded-[10px]',
+        'flex flex-col sm:flex-row gap-[17px] sm:gap-0',
+        'border-black border-opacity-15',
+        'border-0 sm:border',
+        'overflow-hidden sm:overflow-hidden',
       )}
     >
       {children}

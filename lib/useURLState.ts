@@ -118,6 +118,21 @@ export const useURLState = () => {
         lightColor: StatusLightColor.Gray,
         text: 'Medium',
       });
+    } else if (hints.length === 1 && hints[0] === Hints.hash) {
+      setPrivacyScore({
+        lightColor: StatusLightColor.Green,
+        text: 'High',
+      });
+    } else if (hints.includes(Hints.logs) || hints.includes(Hints.calldata)) {
+      setPrivacyScore({
+        lightColor: StatusLightColor.Red,
+        text: 'Low',
+      });
+    } else {
+      setPrivacyScore({
+        lightColor: StatusLightColor.Yellow,
+        text: 'Medium',
+      });
     }
 
     // speed
@@ -140,9 +155,10 @@ export const useURLState = () => {
 
     // refund
     if (fastMode) {
+      // fast mode is the same as default
       setRefundScore({
-        lightColor: StatusLightColor.Green,
-        text: 'High',
+        lightColor: StatusLightColor.Yellow,
+        text: 'Medium',
       });
     } else if (hints.length === 1 && hints[0] === Hints.hash) {
       setRefundScore({

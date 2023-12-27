@@ -5,8 +5,9 @@ import { useRouter } from 'next/navigation';
 import { Button } from '@/components/buttons/Button';
 import { LearnMore } from '@/components/buttons/LearnMore';
 import { clickableClasses } from '@/components/buttons/styling';
-import { DescriptionPanel } from '@/components/description/DescriptionPanel';
-import { StatusBar } from '@/components/description/StatusBar';
+import { ActionPanel } from '@/components/panels/ActionPanel';
+import { DescriptionPanel } from '@/components/panels/DescriptionPanel';
+import { StatusBar } from '@/components/panels/StatusBar';
 import { DescriptionText } from '@/components/text/DescriptionText';
 import { FormHint } from '@/components/text/FormHint';
 import { classes } from '@/lib/classes';
@@ -53,16 +54,14 @@ export default function Refund() {
         />
       </DescriptionPanel>
 
-      <div
-        className={classes('flex flex-col grow pt-[18px] px-[20px] pb-[19px]')}
-      >
+      <ActionPanel>
         <FormHint className="mb-[12px]">Select refund share</FormHint>
         <div className="grow relative">
           <div className="w-full h-[33px] relative">
             <div
               className={classes(
-                'w-full h-[4px] rounded-[2px] bg-black bg-opacity-10',
-                'absolute top-1/2 -translate-y-1/2',
+                'w-[calc(100%-16px)] h-[4px] rounded-[2px] bg-black bg-opacity-10',
+                'absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2',
                 'z-0',
               )}
             ></div>
@@ -103,30 +102,39 @@ export default function Refund() {
             max={100}
             step={1}
           ></input>
-          {(refundAddress || refundShare !== defaultRefundShare) && (
-            <>
-              <FormHint className="mt-[12px] mb-[6px]">
-                Enter refund address
-              </FormHint>
-              <input
-                type="text"
-                value={refundAddress}
-                onChange={(e) => {
-                  setRefundAddress(e.target.value);
-                }}
-                className={classes(
-                  'w-full h-[42px] border border-black border-opacity-10 rounded-[8px]',
-                  'p-[10px]',
-                  clickableClasses,
-                  'cursor-pointer',
-                )}
-                placeholder="0x..."
-              ></input>
-            </>
-          )}
+          <div className="flex flex-row justify-between text-[20px] tracking-[-0.4px] opacity-50 leading-[18px] px-[8px]">
+            <div>0%</div>
+            <div>100%</div>
+          </div>
+
+          <div
+            className={classes(
+              refundAddress || refundShare !== defaultRefundShare
+                ? 'opacity-1 visible'
+                : 'opacity-0 invisible',
+            )}
+          >
+            <FormHint className="mt-[12px] mb-[6px]">
+              Enter refund address
+            </FormHint>
+            <input
+              type="text"
+              value={refundAddress}
+              onChange={(e) => {
+                setRefundAddress(e.target.value);
+              }}
+              className={classes(
+                'w-full h-[42px] border border-black border-opacity-10 rounded-[8px]',
+                'p-[10px]',
+                clickableClasses,
+                'cursor-pointer',
+              )}
+              placeholder="0x..."
+            ></input>
+          </div>
         </div>
         <Button
-          className="mt-[32px]"
+          className="mt-[17px] sm:mt-[32px]"
           onClick={() => {
             if (refundShare !== defaultRefundShare && !refundAddress) {
               alert('Please enter your refund address');
@@ -137,7 +145,7 @@ export default function Refund() {
         >
           Confirm
         </Button>
-      </div>
+      </ActionPanel>
     </>
   );
 }

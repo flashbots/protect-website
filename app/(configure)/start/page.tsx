@@ -2,8 +2,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { BigBlackButton } from '@/components/buttons/BigBlackButton';
-import { DescriptionPanel } from '@/components/description/DescriptionPanel';
 import { ArrowRight } from '@/components/icons/ArrowRight';
+import { ActionPanel } from '@/components/panels/ActionPanel';
+import { DescriptionPanel } from '@/components/panels/DescriptionPanel';
 import { DescriptionText } from '@/components/text/DescriptionText';
 import { FormHint } from '@/components/text/FormHint';
 import { classes } from '@/lib/classes';
@@ -28,12 +29,16 @@ export default function Start() {
         </DescriptionText>
       </DescriptionPanel>
 
-      <div
-        className={classes(
-          'flex flex-col grow bg-[#D9D9D9] bg-opacity-20 pt-[18px] px-[22px]',
+      <ActionPanel
+        backgroundClass={classes(
+          // Color = Color * alpha + Background * (1 - alpha);
+          // rgba(217, 217, 217, 0.2) => rgba(247, 247, 247)
+          'bg-[rgba(247,247,247)]',
         )}
       >
-        <FormHint className="mb-[14px]">Select setup mode</FormHint>
+        <FormHint className="mb-[14px] hidden sm:flex">
+          Select setup mode
+        </FormHint>
 
         <Link href="/summary?fast=true">
           <BigBlackButton className="mb-[15px]">
@@ -75,7 +80,7 @@ export default function Start() {
             <ArrowRight className="opacity-30 group-hover:opacity-50 transition-all" />
           </div>
         </Link>
-      </div>
+      </ActionPanel>
     </>
   );
 }

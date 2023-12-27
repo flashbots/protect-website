@@ -17,7 +17,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body
         className={classes(
           fontCalibre.className,
-          'h-screen w-screen flex flex-row items-center justify-center',
+          'h-dvh w-screen flex flex-col',
+          'justify-end sm:justify-center items-center',
+          'px-[20px] py-[28px]',
+          'max-h-dvh overflow-hidden',
         )}
       >
         {children}

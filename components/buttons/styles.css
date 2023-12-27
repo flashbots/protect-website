@@ -1,7 +1,9 @@
-.bg-squares-grid {
-  background-image: url("/icons/background-square.svg");
-  background-repeat: repeat;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-smooth: never;
+@media only screen and (min-width: 640px) {
+  .bg-squares-grid {
+    background-image: url("/icons/background-square.svg");
+    background-repeat: repeat;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-smooth: never;
+  }
 }

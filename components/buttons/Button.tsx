@@ -4,6 +4,8 @@ import Link from 'next/link';
 
 import { classes } from '@/lib/classes';
 
+import { clickableClasses } from './styling';
+
 export const Button = ({
   children,
   onClick,
@@ -31,6 +33,8 @@ export const Button = ({
       'border-black bg-white text-black h-[39px] border-opacity-10',
     'leading-[18px]',
     'flex flex-row items-center justify-center',
+    clickableClasses,
+    'hover:scale-y-[1.03] hover:scale-x-[1.01]',
   );
 
   if (href) {

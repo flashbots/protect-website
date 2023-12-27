@@ -5,10 +5,11 @@ import { useRouter } from 'next/navigation';
 
 import { Button } from '@/components/buttons/Button';
 import { LearnMore } from '@/components/buttons/LearnMore';
-import { DescriptionPanel } from '@/components/description/DescriptionPanel';
-import { StatusBar } from '@/components/description/StatusBar';
 import { Checkbox } from '@/components/inputs/Checkbox';
 import { RadioOption } from '@/components/inputs/RadioOption';
+import { ActionPanel } from '@/components/panels/ActionPanel';
+import { DescriptionPanel } from '@/components/panels/DescriptionPanel';
+import { StatusBar } from '@/components/panels/StatusBar';
 import { DescriptionText } from '@/components/text/DescriptionText';
 import { FormHint } from '@/components/text/FormHint';
 import { classes } from '@/lib/classes';
@@ -53,9 +54,7 @@ export default function Privacy() {
         <LearnMore href="https://docs.flashbots.net/flashbots-protect/mev-share#hints" />
       </DescriptionPanel>
 
-      <div
-        className={classes('flex flex-col grow pt-[18px] px-[20px] pb-[19px]')}
-      >
+      <ActionPanel>
         <FormHint className="mb-[6px]">Select hints to share</FormHint>
 
         <RadioOption
@@ -80,7 +79,7 @@ export default function Privacy() {
           onChange={(selected) => {
             if (selected) setHints([Hints.hash]);
           }}
-          className="mb-[10px]"
+          className="mb-0 sm:mb-[10px]"
         >
           <Image
             src="/icons/private.svg"
@@ -93,9 +92,9 @@ export default function Privacy() {
           </div>
         </RadioOption>
 
-        <div className="flex flex-col flex-wrap gap-y-[14px] gap-x-[24px] overflow-scroll mt-[42px]">
+        <div className="flex flex-col flex-wrap gap-y-[14px] gap-x-[24px] overflow-scroll mt-[18px] sm:mt-[42px] pl-2">
           {hintOptions.map((hint) => (
-            <div key={hint.value}>
+            <div key={hint.value} className="">
               <Checkbox
                 checked={hints.includes(hint.value)}
                 onChange={(checked) => {
@@ -167,7 +166,7 @@ export default function Privacy() {
         </div>
 
         <Button
-          className="mt-[32px]"
+          className="mt-[9px] sm:mt-[32px]"
           onClick={() => {
             router.push(
               backToSummary
@@ -178,7 +177,7 @@ export default function Privacy() {
         >
           Confirm
         </Button>
-      </div>
+      </ActionPanel>
     </>
   );
 }

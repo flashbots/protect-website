@@ -5,15 +5,16 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
-import { useSupportedBuilders } from '@/components/builders/useSupportedBuilders';
 import { Button } from '@/components/buttons/Button';
 import { LearnMore } from '@/components/buttons/LearnMore';
 import { clickableClasses } from '@/components/buttons/styling';
-import { DescriptionPanel } from '@/components/description/DescriptionPanel';
 import { Checkbox } from '@/components/inputs/Checkbox';
+import { ActionPanel } from '@/components/panels/ActionPanel';
+import { DescriptionPanel } from '@/components/panels/DescriptionPanel';
 import { DescriptionText } from '@/components/text/DescriptionText';
 import { FormHint } from '@/components/text/FormHint';
 import { classes } from '@/lib/classes';
+import { useSupportedBuilders } from '@/lib/useSupportedBuilders';
 import { alwaysSelectedBuilders, useURLState } from '@/lib/useURLState';
 
 export default function Speed() {
@@ -53,14 +54,13 @@ export default function Speed() {
         <LearnMore href="https://docs.flashbots.net/flashbots-protect/mev-share#builders" />
       </DescriptionPanel>
 
-      <div
-        className={classes('flex flex-col grow pt-[18px] px-[20px] pb-[19px]')}
-      >
+      <ActionPanel>
         <FormHint className="mb-[6px]">Select builders</FormHint>
         <div
           className={classes(
             'flex flex-row items-center justify-between',
-            'rounded-[8px] border border-black border-opacity-10 p-[14px] pl-[16px]',
+            'rounded-[8px] border border-black border-opacity-10 px-[15px]',
+            'h-[48px] shrink-0',
             'mb-[22px]',
             clickableClasses,
           )}
@@ -78,9 +78,9 @@ export default function Speed() {
             className="opacity-30 hover:opacity-80 cursor-pointer transition-all"
           />
         </div>
-        <div className="flex flex-col flex-wrap gap-y-[14px] gap-x-[24px] overflow-scroll pl-[8px]">
+        <div className="flex flex-col flex-wrap gap-y-[14px] gap-x-[24px] overflow-scroll pl-2 min-h-[166px]">
           {supportedBuilders.map((builder) => (
-            <div key={builder.name}>
+            <div key={builder.name} className="w-[50%]">
               <Checkbox
                 checked={builders.includes(builder.name)}
                 onChange={(checked) => {
@@ -112,7 +112,7 @@ export default function Speed() {
           ))}
         </div>
         <Button
-          className="mt-[32px]"
+          className="mt-[22px] sm:mt-[32px]"
           onClick={() => {
             router.push(
               backToSummary
@@ -123,7 +123,7 @@ export default function Speed() {
         >
           Confirm
         </Button>
-      </div>
+      </ActionPanel>
     </>
   );
 }

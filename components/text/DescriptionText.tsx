@@ -14,7 +14,10 @@ export const DescriptionText = ({
   return (
     <div
       className={classes(
-        'text-black text-[19px] tracking-[-0.38px] leading-[22px] mb-[11px]',
+        'text-black leading-[22px]',
+        'mb-[10px] sm:mb-[11px]',
+        'text-[20px] sm:text-[19px]',
+        'tracking-[-0.4px] sm:tracking-[-0.38px]',
         textOpacityClass,
         className,
       )}
