@@ -94,7 +94,8 @@ export default function Refund() {
               '[&::-webkit-slider-thumb]:h-[33px] [&::-moz-range-thumb]:h-[33px]',
               '[&::-webkit-slider-thumb]:rounded-md [&::-moz-range-thumb]:rounded-md',
               '[&::-webkit-slider-thumb]:bg-transparent [&::-moz-range-thumb]:bg-transparent',
-              '[&::-webkit-slider-thumb]:shadow-0 [&::-moz-range-thumb]:shadow-0',
+              '[&::-webkit-slider-thumb]:shadow-none [&::-moz-range-thumb]:shadow-none',
+              '[&::-webkit-slider-thumb]:ring-0 [&::-moz-range-thumb]:ring-0',
               'cursor-pointer',
             )}
             value={refundShare}
