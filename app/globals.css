@@ -12,7 +12,7 @@ body {
   /* prevent body scrolling */
   margin: 0;
   height: 100%;
-  overflow: hidden;
+  overflow: hidden; 
 }
 
 /* hide scroll bars */
