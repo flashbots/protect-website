@@ -8,10 +8,12 @@ export const NavLink = ({
   children,
   href,
   isActive,
+  onClick,
 }: {
   children: ReactNode;
   href: string;
   isActive?: boolean;
+  onClick?: () => void;
 }) => {
   return (
     <Link
@@ -19,9 +21,13 @@ export const NavLink = ({
         isActive
           ? 'opacity-100 hover:opacity-80'
           : 'opacity-40 hover:opacity-60',
-        'text-black text-[17px] font-medium leading-[33px] tracking-[-0.34px]',
+        'text-black font-medium',
+        'text-[48px] sm:text-[17px]',
+        'tracking-[-0.86px] sm:tracking-[-0.34px]',
+        'leading-[22px] sm:leading-[33px]',
       )}
       href={href}
+      onClick={onClick}
     >
       {children}
     </Link>
