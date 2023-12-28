@@ -64,6 +64,7 @@ export default function Home() {
               width={20}
               alt="play"
               className="mr-[6px]"
+              sizes="(max-width: 728px) 100vw, 320px"
             />
             Get Protected
           </Button>
