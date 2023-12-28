@@ -10,16 +10,15 @@ export default function Home() {
       className={classes(
         'sm:w-[715px] sm:h-[422px] bg-black rounded-[10px]',
         'flex flex-col sm:flex-row',
-        'items-center justify-center',
+        'items-center justify-start',
         'gap-[15px] sm:gap-[29px]',
         'p-[17px] sm:pr-[30px]',
-        'pb-[25px] sm:pb-[17px]',
-        'overflow-scroll',
+        'h-full max-h-[553px]',
       )}
     >
       <div
         className={classes(
-          'aspect-[320/218] sm:aspect-auto sm:h-full',
+          'grow sm:h-full',
           'w-full sm:w-[320px]',
           'bg-black overflow-hidden rounded-[10px] shrink-0 relative',
           'border border-white border-opacity-20',
@@ -35,9 +34,9 @@ export default function Home() {
       <div
         className={classes(
           'flex flex-col justify-between sm:py-[13px] gap-[21px]',
-          'grow h-full',
+          'sm:grow sm:h-full',
           'text-white',
-          'p-[7px] sm:p-0',
+          'px-[7px] sm:p-0',
         )}
       >
         <div>
