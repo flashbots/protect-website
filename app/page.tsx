@@ -14,6 +14,7 @@ export default function Home() {
         'gap-[15px] sm:gap-[29px]',
         'p-[17px] sm:pr-[30px]',
         'pb-[25px] sm:pb-[17px]',
+        'overflow-scroll',
       )}
     >
       <div
