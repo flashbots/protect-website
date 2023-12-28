@@ -9,8 +9,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-smooth: never;
 
-  /* prevent body scrolling
+  /* prevent body scrolling */
   margin: 0;
   height: 100%;
-  overflow: hidden; */
+  overflow: hidden; 
 }
