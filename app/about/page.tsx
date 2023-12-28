@@ -13,7 +13,7 @@ export default function About() {
         'items-center justify-start',
         'pt-[27px] sm:pt-[30px] px-[28px] sm:px-[39px]',
         'pb-[32px]',
-        'overflow-scroll',
+        'overflow-scroll sm:overflow-hidden',
       )}
     >
       <div
