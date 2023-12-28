@@ -21,9 +21,17 @@ export default function Home() {
         className={classes(
           'aspect-[320/218] sm:aspect-auto sm:h-full',
           'w-full sm:w-[320px]',
-          'bg-gray-500 rounded-[10px] shrink-0',
+          'bg-black overflow-hidden rounded-[10px] shrink-0 relative',
+          'border border-white border-opacity-20',
         )}
-      ></div>
+      >
+        <Image
+          src="/hero-animation.gif"
+          alt="animation"
+          fill
+          style={{ objectFit: 'cover', objectPosition: 'center' }}
+        />
+      </div>
       <div
         className={classes(
           'flex flex-col justify-between sm:py-[13px] gap-[21px]',
