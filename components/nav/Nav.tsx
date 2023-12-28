@@ -77,8 +77,9 @@ export const Nav = () => {
         </div>
         <div
           className={classes(
-            isMenuOpen ? 'opacity-100 max-h-auto' : 'opacity-0 max-h-0',
-            'mb-[87px]',
+            isMenuOpen
+              ? 'opacity-100 max-h-auto pb-[87px]'
+              : 'opacity-0 max-h-0 pb-0',
             'flex flex-col gap-[48px]',
             'transition-all duration-100',
           )}
