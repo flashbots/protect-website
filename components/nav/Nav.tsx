@@ -49,8 +49,9 @@ export const Nav = () => {
       {/* Mobile */}
       <div
         className={classes(
-          'flex sm:hidden w-full flex-col justify-between',
+          'flex sm:hidden w-full flex-col',
           'transition-all',
+          'relative',
           isMenuOpen ? 'min-h-dvh shrink-0' : 'min-h-0 h-auto',
         )}
       >
@@ -60,28 +61,42 @@ export const Nav = () => {
             'mb-[23px]',
           )}
         >
-          <Link className="flex flex-row items-start gap-[10px]" href="/">
+          <Link
+            className="flex flex-row items-start gap-[10px]"
+            href="/"
+            onClick={() => setIsMenuOpen(false)}
+          >
             <Image src="/icons/logo.svg" width={36} height={35} alt="logo" />
             <div className="text-black text-[29px] font-medium tracking-[-0.58px]">
               Protect
             </div>
           </Link>
-          <Image
-            src="/icons/menu-hamburger.svg"
-            width={30}
-            height={30}
-            alt="open menu"
-            className="cursor-pointer opacity-50 hover:opacity-80"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          />
+          {isMenuOpen ? (
+            <Image
+              src="/icons/menu-close.svg"
+              width={30}
+              height={30}
+              alt="close menu"
+              className="cursor-pointer opacity-50 hover:opacity-80"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            />
+          ) : (
+            <Image
+              src="/icons/menu-hamburger.svg"
+              width={30}
+              height={30}
+              alt="open menu"
+              className="cursor-pointer opacity-50 hover:opacity-80"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            />
+          )}
         </div>
         <div
           className={classes(
-            isMenuOpen
-              ? 'opacity-100 max-h-auto pb-[87px]'
-              : 'opacity-0 max-h-0 pb-0',
-            'flex flex-col gap-[48px]',
-            'transition-all duration-100',
+            'fixed bottom-0',
+            isMenuOpen ? 'opacity-100 scale-y-100' : 'opacity-0 scale-y-0',
+            'flex flex-col gap-[48px] pb-[87px]',
+            'transition-all origin-top',
           )}
         >
           <NavLink
