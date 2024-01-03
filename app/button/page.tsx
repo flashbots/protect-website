@@ -16,7 +16,7 @@ export default function DocumentationButton() {
         className={classes(
           'pl-[20px] pr-[40px] pt-[10px] pb-[16px] h-[88px]',
           darkMode ? 'bg-white' : 'bg-black',
-          'flex flex-row items-center justify-between gap-[10px]',
+          'flex flex-row items-center justify-start gap-[10px]',
         )}
       >
         <Image
