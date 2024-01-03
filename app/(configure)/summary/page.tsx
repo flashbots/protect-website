@@ -35,7 +35,7 @@ export default function Summary() {
       status: privacyScore,
     },
     {
-      text: 'Inclusion Speed',
+      text: 'Speed',
       url: '/configure/refund',
       status: speedScore,
     },
@@ -220,8 +220,7 @@ export default function Summary() {
             Other wallets
           </div>
           <div className="opacity-50 text-black text-base font-normal tracking-[-0.32px] leading-[19px] mb-[8px]">
-            If your wallet allows you to enter a custom RPC endpoint, please use
-            the URL below.
+            For other wallets, follow this guide.
           </div>
           <LearnMore
             href="https://flashbots.notion.site/Protect-Wallet-Guide-a929230357b64d9aaf66d2edc8b2dd5c"
@@ -236,7 +235,7 @@ export default function Summary() {
           >
             <Image src="/icons/copy.svg" height={16} width={15} alt="copy" />
             <div className="text-black text-base font-medium tracking-[-0.32px] leading-[33px] ml-[8px]">
-              Copy your RPC URL
+              Copy your Protect URL
             </div>
           </Button>
         </div>

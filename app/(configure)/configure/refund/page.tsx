@@ -37,8 +37,8 @@ export default function Refund() {
         bottomBar={<StatusBar status={speedScore}>Inclusion Speed</StatusBar>}
       >
         <DescriptionText>
-          Protect will refund you if your transaction leaks any value. You can
-          keep this refund, or use it to pay for your transaction to be
+          Protect will refund you if your transaction generates any value. You
+          can keep this refund, or use it to pay for your transaction to be
           confirmed onchain more quickly.
         </DescriptionText>
         <DescriptionText className="inline">
