@@ -22,7 +22,8 @@ export default function Start() {
       >
         <DescriptionText>
           Flashbots Protect lets you control how your transactions are
-          processed. You can choose how to prioritize speed, cost, and privacy.
+          processed. You can choose how to prioritize speed, privacy and
+          refunds.
         </DescriptionText>
         <DescriptionText textOpacityClass="text-opacity-50">
           You can always change this later.
