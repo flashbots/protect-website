@@ -15,7 +15,9 @@ export enum Hints {
 
 export const alwaysSelectedHints = [Hints.hash];
 
-export const defaultRefundShare = 90;
+const defaultRefundShare = 90;
+
+const defaultRefundAddress = 'txorigin';
 
 export const useURLState = () => {
   const [backToSummary, setBackToSummary] = useState<boolean>(false);
@@ -25,7 +27,8 @@ export const useURLState = () => {
   const [builders, setBuilders] = useState<string[]>(alwaysSelectedBuilders);
   const [hints, setHints] = useState<string[]>([]);
   const [refundShare, setRefundShare] = useState<number>(defaultRefundShare);
-  const [refundAddress, setRefundAddress] = useState<string>('');
+  const [refundAddress, setRefundAddress] =
+    useState<string>(defaultRefundAddress);
 
   // outputs
   const [urlParams, setUrlParams] = useState<string>();

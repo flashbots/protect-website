@@ -4,14 +4,13 @@ import { useRouter } from 'next/navigation';
 
 import { Button } from '@/components/buttons/Button';
 import { LearnMore } from '@/components/buttons/LearnMore';
-import { clickableClasses } from '@/components/buttons/styling';
 import { ActionPanel } from '@/components/panels/ActionPanel';
 import { DescriptionPanel } from '@/components/panels/DescriptionPanel';
 import { StatusBar } from '@/components/panels/StatusBar';
 import { DescriptionText } from '@/components/text/DescriptionText';
 import { FormHint } from '@/components/text/FormHint';
 import { classes } from '@/lib/classes';
-import { defaultRefundShare, useURLState } from '@/lib/useURLState';
+import { useURLState } from '@/lib/useURLState';
 
 export default function Refund() {
   const router = useRouter();
@@ -21,8 +20,8 @@ export default function Refund() {
     refundShare,
     setRefundShare,
     speedScore,
-    refundAddress,
-    setRefundAddress,
+    // refundAddress,
+    // setRefundAddress,
   } = useURLState();
 
   return (
@@ -56,7 +55,7 @@ export default function Refund() {
 
       <ActionPanel>
         <FormHint className="mb-[12px]">Select refund share</FormHint>
-        <div className="grow relative">
+        <div className="grow relative mb-[40px]">
           <div className="w-full h-[33px] relative">
             <div
               className={classes(
@@ -111,7 +110,7 @@ export default function Refund() {
             <div>100%</div>
           </div>
 
-          <div
+          {/* <div
             className={classes(
               refundAddress || refundShare !== defaultRefundShare
                 ? 'opacity-1 visible'
@@ -135,15 +134,15 @@ export default function Refund() {
               )}
               placeholder="0x..."
             ></input>
-          </div>
+          </div> */}
         </div>
         <Button
           className="mt-[17px] sm:mt-[32px]"
           onClick={() => {
-            if (refundShare !== defaultRefundShare && !refundAddress) {
-              alert('Please enter your refund address');
-              return;
-            }
+            // if (refundShare !== defaultRefundShare && !refundAddress) {
+            //   alert('Please enter your refund address');
+            //   return;
+            // }
             router.push(`/summary?${urlParams}`);
           }}
         >
