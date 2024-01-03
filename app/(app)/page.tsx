@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 import { classes } from '@/lib/classes';
 
-import { Button } from '../components/buttons/Button';
+import { Button } from '../../components/buttons/Button';
 
 export default function Home() {
   return (

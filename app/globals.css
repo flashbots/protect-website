@@ -3,16 +3,15 @@
 @tailwind utilities;
 
 body {
-  background-image: url("/icons/background-dot.svg");
-  background-repeat: repeat;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-smooth: never;
-
   /* prevent body scrolling */
   margin: 0;
   height: 100%;
-  overflow: hidden; 
+  overflow: hidden;
+
+  /* prevent font smoothing to match figma font */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-smooth: never;
 }
 
 /* hide scroll bars */
