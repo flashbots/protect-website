@@ -89,7 +89,9 @@ export const useURLState = () => {
     const params = new URLSearchParams();
 
     // for builders
-    builders.forEach((builder) => params.append('builder', builder));
+    builders
+      .filter((builder) => !alwaysSelectedBuilders.includes(builder))
+      .forEach((builder) => params.append('builder', builder));
     setUrlParams(params.toString());
 
     // for hints
@@ -112,7 +114,7 @@ export const useURLState = () => {
 
   // calculate summary stats
   useEffect(() => {
-    // TODO: calculate privacy score for non-fast mode
+    // privacy
     if (fastMode) {
       setPrivacyScore({
         lightColor: StatusLightColor.Gray,
@@ -143,8 +145,8 @@ export const useURLState = () => {
       });
     } else if (refundShare <= 50) {
       setSpeedScore({
-        lightColor: StatusLightColor.Green,
-        text: 'Fast',
+        lightColor: StatusLightColor.Yellow,
+        text: 'Medium',
       });
     } else {
       setSpeedScore({
