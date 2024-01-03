@@ -36,12 +36,12 @@ export default function Summary() {
     },
     {
       text: 'Speed',
-      url: '/configure/refund',
+      url: '/configure/speed',
       status: speedScore,
     },
     {
       text: 'Refund Likelihood',
-      url: '/configure/privacy',
+      url: '/configure/refund',
       status: refundScore,
     },
   ];

@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 import { Button } from '@/components/buttons/Button';
@@ -70,13 +69,6 @@ export default function Speed() {
               Send to all builders
             </div>
           </Checkbox>
-          <Image
-            src="/icons/question-icon.svg"
-            height={20}
-            width={20}
-            alt="question"
-            className="opacity-30 hover:opacity-80 cursor-pointer transition-all"
-          />
         </div>
         <div className="flex flex-col flex-wrap gap-y-[14px] gap-x-[24px] overflow-scroll pl-2 min-h-[166px]">
           {supportedBuilders.map((builder) => (
