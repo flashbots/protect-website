@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 
 import { Status, StatusLightColor } from '@/components/icons/StatusLight';
 
+import { useSupportedBuilders } from './useSupportedBuilders';
+
 export const alwaysSelectedBuilders = ['flashbots'];
 
 export enum Hints {
@@ -44,6 +46,9 @@ export const useURLState = () => {
     lightColor: StatusLightColor.Gray,
     text: 'Medium',
   });
+
+  // all builders
+  const supportedBuilders = useSupportedBuilders();
 
   // on mount, set builders from URL
   useEffect(() => {
@@ -146,15 +151,37 @@ export const useURLState = () => {
         lightColor: StatusLightColor.Green,
         text: 'Fast',
       });
-    } else if (refundShare <= 50) {
-      setSpeedScore({
-        lightColor: StatusLightColor.Yellow,
-        text: 'Medium',
-      });
-    } else {
+    } else if (builders.length === 1 && builders[0] === 'flashbots') {
+      // Just flashbots = always slow
       setSpeedScore({
         lightColor: StatusLightColor.Red,
         text: 'Slow',
+      });
+    } else if (refundShare > 90) {
+      if (builders.length === supportedBuilders.length) {
+        // All builders, refund share >90% we could make it medium
+        setSpeedScore({
+          lightColor: StatusLightColor.Yellow,
+          text: 'Medium',
+        });
+      } else {
+        // Any other combo of builders, >90% refund share would make inclusion speed slow
+        setSpeedScore({
+          lightColor: StatusLightColor.Red,
+          text: 'Slow',
+        });
+      }
+    } else if (builders.length === supportedBuilders.length) {
+      // All builders = fast
+      setSpeedScore({
+        lightColor: StatusLightColor.Green,
+        text: 'Fast',
+      });
+    } else {
+      // Any other combo of builders = medium
+      setSpeedScore({
+        lightColor: StatusLightColor.Yellow,
+        text: 'Medium',
       });
     }
 
