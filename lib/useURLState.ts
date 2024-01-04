@@ -208,7 +208,7 @@ export const useURLState = () => {
         text: 'Medium',
       });
     }
-  }, [builders, hints, refundShare, fastMode]);
+  }, [builders, hints, refundShare, fastMode, supportedBuilders]);
 
   return {
     builders,
