@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -10,14 +10,34 @@ import { classes } from '@/lib/classes';
 
 import { NavLink } from './NavLink';
 
-export const Nav = () => {
+export const Nav = ({
+  children,
+  displayClassNames = 'flex',
+}: {
+  children?: ReactNode;
+  displayClassNames?: string;
+}) => {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  useEffect(() => {
+    // look for mobile overlay id and make if transparent
+    const mobileOverlay = document.getElementById('mobile-overlay');
+    if (mobileOverlay) {
+      // change class
+      if (isMenuOpen) {
+        mobileOverlay.classList.add('bg-dots');
+      } else {
+        mobileOverlay.classList.remove('bg-dots');
+      }
+    }
+  }, [isMenuOpen]);
 
   return (
     <div
       className={classes(
-        'w-full flex flex-row items-start justify-center px-[18px]',
+        displayClassNames,
+        'w-full flex-row items-start justify-center px-[18px]',
       )}
     >
       {/* Desktop */}
@@ -61,16 +81,20 @@ export const Nav = () => {
             'mb-[23px]',
           )}
         >
-          <Link
-            className="flex flex-row items-start gap-[10px]"
-            href="/"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            <Image src="/icons/logo.svg" width={36} height={35} alt="logo" />
-            <div className="text-black text-[29px] font-medium tracking-[-0.58px]">
-              Protect
-            </div>
-          </Link>
+          {children && !isMenuOpen ? (
+            children
+          ) : (
+            <Link
+              className="flex flex-row items-start gap-[10px]"
+              href="/"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              <Image src="/icons/logo.svg" width={36} height={35} alt="logo" />
+              <div className="text-black text-[29px] font-medium tracking-[-0.58px]">
+                Protect
+              </div>
+            </Link>
+          )}
           {isMenuOpen ? (
             <Image
               src="/icons/menu-close.svg"

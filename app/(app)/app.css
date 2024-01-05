@@ -1,4 +1,5 @@
-body {
+body,
+.bg-dots {
   background-image: url("/icons/background-dot.svg");
   background-repeat: repeat;
 }

@@ -9,6 +9,7 @@ import { Checkbox } from '@/components/inputs/Checkbox';
 import { RadioOption } from '@/components/inputs/RadioOption';
 import { ActionPanel } from '@/components/panels/ActionPanel';
 import { DescriptionPanel } from '@/components/panels/DescriptionPanel';
+import { MobilePanel } from '@/components/panels/MobilePanel';
 import { StatusBar } from '@/components/panels/StatusBar';
 import { DescriptionText } from '@/components/text/DescriptionText';
 import { FormHint } from '@/components/text/FormHint';
@@ -30,15 +31,18 @@ export default function Privacy() {
   const { backToSummary, urlParams, hints, setHints, refundScore } =
     useURLState();
 
+  const title = 'Privacy';
+  const backHref = backToSummary ? '/summary' : '/configure/speed';
+
   return (
-    <>
+    <MobilePanel title={title} backHref={backHref}>
       <DescriptionPanel
-        title="Privacy"
+        title={title}
+        backHref={backHref}
         dots={{
           activeIndex: 1,
           totalDots: 4,
         }}
-        backHref={backToSummary ? '/summary' : '/configure/speed'}
         bottomBar={
           <StatusBar status={refundScore}>Refund Likelihood</StatusBar>
         }
@@ -92,7 +96,16 @@ export default function Privacy() {
           </div>
         </RadioOption>
 
-        <div className="flex flex-col flex-wrap gap-y-[14px] gap-x-[24px] overflow-scroll mt-[18px] sm:mt-[42px] pl-2">
+        <div
+          className={classes(
+            'flex flex-col flex-wrap',
+            'gap-y-[14px] gap-x-[24px] overflow-scroll',
+            'mt-[18px] sm:mt-[42px]',
+            'mb-[20px] sm:mb-0',
+            'pl-2',
+            'max-h-[95px]',
+          )}
+        >
           {hintOptions.map((hint) => (
             <div key={hint.value} className="">
               <Checkbox
@@ -178,6 +191,6 @@ export default function Privacy() {
           Confirm
         </Button>
       </ActionPanel>
-    </>
+    </MobilePanel>
   );
 }

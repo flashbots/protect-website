@@ -4,7 +4,7 @@ import { ReactNode, useEffect, useRef, useState } from 'react';
 
 import { classes } from '@/lib/classes';
 
-import { BackButton } from '../buttons/BackButton';
+import { PanelTitle } from './PanelTitle';
 
 export const DescriptionPanel = ({
   title,
@@ -54,8 +54,8 @@ export const DescriptionPanel = ({
       className={classes(
         'bg-white',
         'w-full sm:w-[333px] h-full',
-        'border-black border-opacity-15 sm:border-opacity-10',
-        'border sm:border-r sm:border-0',
+        'border-black border-opacity-10',
+        'border-0 sm:border-r',
         'sm:shrink-0',
         'flex flex-col justify-between',
         'shadow-[0px_2px_14px_0px_rgba(0,0,0,0.05)] sm:shadow-none',
@@ -68,19 +68,15 @@ export const DescriptionPanel = ({
           {/* title bar */}
           <div
             className={classes(
-              'bg-white p-[22px] pb-[17px] sticky top-0',
-              'flex flex-row items-center justify-between',
+              'hidden sm:flex',
+              'bg-white p-[22px] sticky top-0',
+              'flex-row items-center justify-between',
               'border-b border-black transition-all duration-300',
               scrollPosition > 0 ? 'border-opacity-10' : 'border-opacity-0',
               'z-50',
             )}
           >
-            <div className="flex flex-row items-center gap-[14px]">
-              <BackButton href={backHref} />
-              <div className="text-black text-[26px] font-medium leading-[33px] tracking-[-0.52px]">
-                {title}
-              </div>
-            </div>
+            <PanelTitle title={title} backHref={backHref} />
             <div className="flex flex-row gap-[6px]">
               {Array.from({ length: dots.totalDots }, (_, i) => (
                 <div
@@ -94,7 +90,15 @@ export const DescriptionPanel = ({
             </div>
           </div>
           {/* description text */}
-          <div className="p-[22px] pt-0 pl-[29px] grow">{children}</div>
+          <div
+            className={classes(
+              'p-[22px] pl-[29px] grow',
+              'pb-[11px] sm:pb-[22px]',
+              'pt-[22px] sm:pt-0',
+            )}
+          >
+            {children}
+          </div>
           <div
             className={classes(
               'h-[50px] bg-gradient-to-b from-transparent transition-all',

@@ -17,9 +17,9 @@ export enum Hints {
 
 export const alwaysSelectedHints = [Hints.hash];
 
-const defaultRefundShare = 90;
+export const defaultRefundShare = 90;
 
-const defaultRefundAddress = 'txorigin';
+const defaultRefundAddress = '';
 
 export const useURLState = () => {
   const [backToSummary, setBackToSummary] = useState<boolean>(false);

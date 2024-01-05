@@ -17,6 +17,7 @@ export const LearnMore = ({
     <Link
       href={href}
       className={classes(
+        'mb-[10px]',
         'text-black font-medium leading-[22px] tracking-[-0.38px] flex flex-row items-center gap-1',
         'group',
         className,

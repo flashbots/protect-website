@@ -10,6 +10,7 @@ import { clickableClasses } from '@/components/buttons/styling';
 import { StatusLight } from '@/components/icons/StatusLight';
 import { ActionPanel } from '@/components/panels/ActionPanel';
 import { DescriptionPanel } from '@/components/panels/DescriptionPanel';
+import { MobilePanel } from '@/components/panels/MobilePanel';
 import { classes } from '@/lib/classes';
 import { useURLState } from '@/lib/useURLState';
 
@@ -73,15 +74,18 @@ export default function Summary() {
   //   }
   // }, [fastMode, setRefundShare, setBuilders, supportedBuilders]);
 
+  const title = 'Summary';
+  const backHref = fastMode ? 'start' : '/configure/refund';
+
   return (
-    <>
+    <MobilePanel title={title} backHref={backHref}>
       <DescriptionPanel
-        title="Summary"
+        title={title}
+        backHref={backHref}
         dots={{
           activeIndex: fastMode ? 1 : 3,
           totalDots: fastMode ? 2 : 4,
         }}
-        backHref={fastMode ? 'start' : '/configure/refund'}
       >
         <div className="h-full flex flex-col justify-between">
           <div
@@ -148,6 +152,7 @@ export default function Summary() {
           // rgba(217, 217, 217, 0.2) => rgba(247, 247, 247)
           'bg-white sm:bg-[rgba(247,247,247)]',
         )}
+        borderClass="border-0"
       >
         <BigBlackButton
           className="flex flex-row justify-center items-center gap-[10px]"
@@ -240,6 +245,6 @@ export default function Summary() {
           </Button>
         </div>
       </ActionPanel>
-    </>
+    </MobilePanel>
   );
 }

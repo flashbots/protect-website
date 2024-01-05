@@ -20,7 +20,7 @@ export const StatusBar = ({
     >
       <div
         className={classes(
-          'border-t border-black border-opacity-10 sm:border-opacity-0',
+          // 'border-t border-black border-opacity-10 sm:border-opacity-0',
           'flex flex-row items-center justify-between',
           'pt-[13px] sm:px-[29px]',
         )}

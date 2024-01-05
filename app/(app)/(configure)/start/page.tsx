@@ -5,20 +5,24 @@ import { BigBlackButton } from '@/components/buttons/BigBlackButton';
 import { ArrowRight } from '@/components/icons/ArrowRight';
 import { ActionPanel } from '@/components/panels/ActionPanel';
 import { DescriptionPanel } from '@/components/panels/DescriptionPanel';
+import { MobilePanel } from '@/components/panels/MobilePanel';
 import { DescriptionText } from '@/components/text/DescriptionText';
 import { FormHint } from '@/components/text/FormHint';
 import { classes } from '@/lib/classes';
 
 export default function Start() {
+  const title = 'Get started';
+  const backHref = '/';
+
   return (
-    <>
+    <MobilePanel title={title} backHref={backHref}>
       <DescriptionPanel
-        title="Get started"
+        title={title}
+        backHref={backHref}
         dots={{
           activeIndex: 0,
           totalDots: 2,
         }}
-        backHref="/"
       >
         <DescriptionText>
           Flashbots Protect lets you control how your transactions are
@@ -34,8 +38,10 @@ export default function Start() {
         backgroundClass={classes(
           // Color = Color * alpha + Background * (1 - alpha);
           // rgba(217, 217, 217, 0.2) => rgba(247, 247, 247)
-          'bg-[rgba(247,247,247)]',
+          'sm:bg-[rgba(247,247,247)]',
+          'bg-white',
         )}
+        borderClass="border-0"
       >
         <FormHint className="mb-[14px] hidden sm:flex">
           Select setup mode
@@ -82,6 +88,6 @@ export default function Start() {
           </div>
         </Link>
       </ActionPanel>
-    </>
+    </MobilePanel>
   );
 }

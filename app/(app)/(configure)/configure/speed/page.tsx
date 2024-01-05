@@ -10,6 +10,7 @@ import { clickableClasses } from '@/components/buttons/styling';
 import { Checkbox } from '@/components/inputs/Checkbox';
 import { ActionPanel } from '@/components/panels/ActionPanel';
 import { DescriptionPanel } from '@/components/panels/DescriptionPanel';
+import { MobilePanel } from '@/components/panels/MobilePanel';
 import { DescriptionText } from '@/components/text/DescriptionText';
 import { FormHint } from '@/components/text/FormHint';
 import { classes } from '@/lib/classes';
@@ -28,15 +29,18 @@ export default function Speed() {
     }
   }, [selectAllBuilders, supportedBuilders, setBuilders]);
 
+  const title = 'Speed';
+  const backHref = backToSummary ? '/summary' : '/start';
+
   return (
-    <>
+    <MobilePanel title={title} backHref={backHref}>
       <DescriptionPanel
-        title="Speed"
+        title={title}
         dots={{
           activeIndex: 0,
           totalDots: 4,
         }}
-        backHref={backToSummary ? '/summary' : '/start'}
+        backHref={backHref}
       >
         <DescriptionText>
           How quickly your transactions are confirmed onchain is determined by
@@ -117,6 +121,6 @@ export default function Speed() {
           Confirm
         </Button>
       </ActionPanel>
-    </>
+    </MobilePanel>
   );
 }
