@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 
+import { ArrowRight } from '@/components/icons/ArrowRight';
 import { classes } from '@/lib/classes';
 
 export default function DocumentationButton() {
@@ -39,9 +40,10 @@ export default function DocumentationButton() {
             className={classes(
               'text-[30px] font-medium tracking-[-0.6px] leading-[18px]',
               darkMode ? 'text-black' : 'text-white',
+              'flex flex-row items-end gap-2',
             )}
           >
-            Flashbots Protect
+            Flashbots Protect <ArrowRight className="relative top-[2px]" />
           </div>
         </div>
       </div>
