@@ -27,7 +27,7 @@ export const Button = ({
     'text-[20px] shrink-0',
     'font-medium',
     'border',
-    type === 'primary-black' && 'border-black bg-black text-white h-[46px]',
+    type === 'primary-black' && 'border-black bg-black text-white h-[48px]',
     type === 'primary-white' && 'bg-black bg-white text-black h-[46px]',
     type === 'secondary' &&
       'border-black bg-white text-black h-[39px] border-opacity-10',

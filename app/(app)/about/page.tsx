@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 import { Button } from '@/components/buttons/Button';
 import { AboutBox } from '@/components/text/AboutBox';
 import { classes } from '@/lib/classes';
@@ -50,6 +52,13 @@ export default function About() {
             href={'/start'}
             className={'text-[19px] tracking-[-0.38px]'}
           >
+            <Image
+              src="/icons/lightning-icon.svg"
+              alt="lightning"
+              height={16}
+              width={15}
+              className="flex sm:hidden mr-[10px]"
+            />
             Get Protected
           </Button>
         </div>

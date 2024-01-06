@@ -155,6 +155,7 @@ export default function Summary() {
         borderClass="border-0"
       >
         <BigBlackButton
+          forceSquares
           className="flex flex-row justify-center items-center gap-[10px]"
           paddingClassName="py-[10px] sm:py-[26px]"
           onClick={() => {

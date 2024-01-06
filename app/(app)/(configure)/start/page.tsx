@@ -48,7 +48,10 @@ export default function Start() {
         </FormHint>
 
         <Link href="/summary?fast=true">
-          <BigBlackButton className="mb-[15px]">
+          <BigBlackButton
+            className="mb-[15px]"
+            paddingClassName="pt-[24px] px-[25px] pb-[21px]"
+          >
             <div className="flex flex-row justify-between items-center text-white">
               <Image
                 src="/icons/lightning-icon.svg"
@@ -70,21 +73,27 @@ export default function Start() {
         <Link href="/configure/speed">
           <div
             className={classes(
-              'bg-white rounded-[8px] pt-[17px] px-[20px] pb-[13px] border border-black border-opacity-15',
-              'flex flex-row justify-between items-center',
+              'bg-white rounded-[8px] pt-[24px] px-[25px] pb-[21px] border border-black border-opacity-15',
+              'flex flex-col justify-between',
               'text-black',
               'group hover:border-opacity-30 cursor-pointer transition-all',
             )}
           >
-            <div>
-              <div className="text-black text-2xl font-medium tracking-[-0.48px] leading-[18px] mb-[6px]">
-                Custom
-              </div>
-              <div className="opacity-80 text-black text-base font-normal tracking-[-0.32px] leading-[22px]">
-                For users with unique needs.
-              </div>
+            <div className="flex flex-row justify-between items-center text-black">
+              <Image
+                src="/icons/custom-icon.svg"
+                alt="custom"
+                height={24}
+                width={24}
+              />
+              <ArrowRight />
             </div>
-            <ArrowRight className="opacity-30 group-hover:opacity-50 transition-all" />
+            <div className="text-black text-[29px] font-medium leading-[18px] tracking-[-0.58px] mt-[24px] mb-[8px]">
+              Custom
+            </div>
+            <div className="opacity-80 text-black text-base font-normal leading-[22px] tracking-[-0.32px] ">
+              For users with unique needs.
+            </div>
           </div>
         </Link>
       </ActionPanel>
