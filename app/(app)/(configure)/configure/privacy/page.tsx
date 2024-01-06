@@ -100,7 +100,7 @@ export default function Privacy() {
           className={classes(
             'flex flex-col flex-wrap',
             'gap-y-[14px] gap-x-[24px] overflow-scroll',
-            'mt-[18px] sm:mt-[42px]',
+            'mt-[18px] sm:mt-[40px]',
             'mb-[20px] sm:mb-0',
             'pl-2',
             'max-h-[95px]',

@@ -50,7 +50,7 @@ export default function Start() {
         <Link href="/summary?fast=true">
           <BigBlackButton
             className="mb-[15px]"
-            paddingClassName="pt-[24px] px-[25px] pb-[21px]"
+            paddingClassName="pt-[24px] px-[25px] pb-[21px] sm:p-[20px] sm:pb-[15px]"
           >
             <div className="flex flex-row justify-between items-center text-white">
               <Image
@@ -73,7 +73,9 @@ export default function Start() {
         <Link href="/configure/speed">
           <div
             className={classes(
-              'bg-white rounded-[8px] pt-[24px] px-[25px] pb-[21px] border border-black border-opacity-15',
+              'bg-white rounded-[8px]',
+              'pt-[24px] px-[25px] pb-[21px] sm:p-[20px] sm:pb-[15px]',
+              'border border-black border-opacity-15',
               'flex flex-col justify-between',
               'text-black',
               'group hover:border-opacity-30 cursor-pointer transition-all',
