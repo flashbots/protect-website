@@ -34,19 +34,17 @@ This was built using [Next.js](https://nextjs.org/) and:
 - [`tailwindcss`](https://tailwindcss.com/) to apply formatting using standard class names
 
 
-## Embedding the Protect Button in Flashbots docs
+## Embedding the Protect Button
 
-Here is example code to embed a button with a link to this app from `https://github.com/flashbots/flashbots-docs`. 
-
-Replace the code in `src/components/ProtectButtonSelector/index.tsx` with the below:
+Here is example code to embed a button with a link to this app:
 
 ```
 import { useEffect, useState } from 'react';
 
-export default function ProtectButtonSelector() {
+export default function ProtectButton() {
 
+  // listen for light/dark theme changes
   const [theme, setTheme] = useState('light')
-
   useEffect(() => {
     const htmlElement = document.documentElement;
     const handleThemeChange = () => {
@@ -58,13 +56,17 @@ export default function ProtectButtonSelector() {
     observer.observe(htmlElement, { attributes: true, attributeFilter: ['data-theme'] });
   }, [])
 
-  return <iframe
-    title='Protect Button'
-    id="protect-button"
-    // replace with correct host
-    src={`https://flashbots-protect-72l.vercel.app/button?theme=${theme}`}
-    height="88" width="336"
-    className="flex dark:dark border-none rounded-lg hover:outline"
-  />
+  return (
+    <div className='w-full flex flex-row justify-center'>
+      <iframe
+        title='Protect Button'
+        id="protect-button"
+        // TODO: replace Vercel preview link with correct URL after deployment
+        src={`https://flashbots-protect-72l.vercel.app/button?theme=${theme}`}
+        height="88" width="348"
+        className="flex dark:dark border-none rounded-lg hover:outline"
+      />
+    </div>
+  )
 }
 ```
