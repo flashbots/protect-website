@@ -10,7 +10,7 @@ import { clickableClasses } from './styling';
 
 export const BackButton = ({ href }: { href?: string }) => {
   const router = useRouter();
-  const { urlParams } = useURLState();
+  const { urlParams, fastMode } = useURLState();
   return (
     <div
       className={classes(
@@ -21,7 +21,7 @@ export const BackButton = ({ href }: { href?: string }) => {
       )}
       onClick={() => {
         if (href) {
-          router.push(`${href}?${urlParams}`);
+          router.push(`${href}?${urlParams}&fast=${!!fastMode}`);
         } else {
           router.back();
         }

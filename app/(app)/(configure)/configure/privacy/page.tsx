@@ -32,7 +32,7 @@ export default function Privacy() {
     useURLState();
 
   const title = 'Privacy';
-  const backHref = backToSummary ? '/summary' : '/configure/speed';
+  const backHref = backToSummary ? `/summary` : '/configure/speed';
 
   return (
     <MobilePanel title={title} backHref={backHref}>

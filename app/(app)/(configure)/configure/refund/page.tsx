@@ -1,5 +1,7 @@
 'use client';
 
+import { useEffect } from 'react';
+
 import { useRouter } from 'next/navigation';
 
 import { Button } from '@/components/buttons/Button';
@@ -24,10 +26,17 @@ export default function Refund() {
     speedScore,
     refundAddress,
     setRefundAddress,
+    fastMode,
   } = useURLState();
 
   const title = 'Refunds';
   const backHref = backToSummary ? '/summary' : '/configure/privacy';
+
+  useEffect(() => {
+    if (fastMode) {
+      setRefundShare(50);
+    }
+  }, [fastMode]);
 
   return (
     <MobilePanel title={title} backHref={backHref}>

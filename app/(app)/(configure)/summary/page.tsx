@@ -98,7 +98,10 @@ export default function Summary() {
           >
             {summaryScores.map(({ text, status, url }, index) => {
               return (
-                <Link href={`${url}?${urlParams}&fromSummary=true`} key={index}>
+                <Link
+                  href={`${url}?${urlParams}&fromSummary=true&fast=${!!fastMode}`}
+                  key={index}
+                >
                   <div
                     className={classes(
                       'border border-black border-opacity-10 px-[17px] rounded-[12px]',

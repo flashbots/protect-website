@@ -21,7 +21,14 @@ export default function Speed() {
   const supportedBuilders = useSupportedBuilders();
   const [selectAllBuilders, setSelectAllBuilders] = useState<boolean>(false);
   const router = useRouter();
-  const { backToSummary, urlParams, builders, setBuilders } = useURLState();
+  const { backToSummary, urlParams, builders, setBuilders, fastMode } =
+    useURLState();
+
+  useEffect(() => {
+    if (fastMode) {
+      setSelectAllBuilders(true);
+    }
+  }, [fastMode]);
 
   useEffect(() => {
     if (selectAllBuilders) {
