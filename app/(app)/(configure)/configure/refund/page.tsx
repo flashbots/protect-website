@@ -14,15 +14,18 @@ import { StatusBar } from '@/components/panels/StatusBar';
 import { DescriptionText } from '@/components/text/DescriptionText';
 import { FormHint } from '@/components/text/FormHint';
 import { classes } from '@/lib/classes';
+import { useSupportedBuilders } from '@/lib/useSupportedBuilders';
 import { defaultRefundShare, useURLState } from '@/lib/useURLState';
 
 export default function Refund() {
   const router = useRouter();
+  const supportedBuilders = useSupportedBuilders();
   const {
     backToSummary,
     urlParams,
     refundShare,
     setRefundShare,
+    setBuilders,
     speedScore,
     refundAddress,
     setRefundAddress,
@@ -35,8 +38,10 @@ export default function Refund() {
   useEffect(() => {
     if (fastMode) {
       setRefundShare(50);
+      // all builders should be selected from fast mode defaults
+      setBuilders(supportedBuilders.map((builder) => builder.name));
     }
-  }, [fastMode]);
+  }, [fastMode, supportedBuilders]);
 
   return (
     <MobilePanel title={title} backHref={backHref}>
