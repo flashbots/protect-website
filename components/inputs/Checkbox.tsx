@@ -26,7 +26,6 @@ export const Checkbox = ({
       className={classes(
         'flex flex-row items-center cursor-pointer',
         className,
-        'pointer-events-none',
       )}
       id={id}
     >
