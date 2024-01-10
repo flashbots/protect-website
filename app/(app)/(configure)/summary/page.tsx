@@ -181,6 +181,12 @@ export default function Summary() {
                   method: 'wallet_addEthereumChain',
                   params: [addChainParams],
                 })
+                .then((res: any) => {
+                  // metamask will return null if chain is added
+                  if (!res) {
+                    alert('Flashbots Protect added to Metamask');
+                  }
+                })
                 .catch((error: any) => {
                   // ignore 4001 "user rejected request" error code
                   if (error.code !== 4001) {
