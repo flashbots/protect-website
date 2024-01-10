@@ -163,7 +163,7 @@ export default function Summary() {
           paddingClassName="py-[10px] sm:py-[26px]"
           onClick={() => {
             const provider = (window as any).ethereum;
-            if (provider) {
+            if (provider && provider.isMetaMask) {
               const addChainParams = {
                 chainId: ETH_CHAIN_ID,
                 chainName: `Flashbots Protect (${ETH_CHAIN_NAME})`,
