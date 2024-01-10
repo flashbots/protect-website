@@ -76,7 +76,11 @@ export default function Speed() {
           )}
           onClick={() => setSelectAllBuilders((prev) => !prev)}
         >
-          <Checkbox checked={selectAllBuilders} onChange={setSelectAllBuilders}>
+          <Checkbox
+            checked={selectAllBuilders}
+            onChange={setSelectAllBuilders}
+            className="pointer-events-none"
+          >
             <div className="text-black text-[20px] font-medium leading-[18px] tracking-[-0.4px] ml-[12px]">
               Send to all builders
             </div>
