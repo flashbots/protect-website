@@ -10,23 +10,26 @@ export const BigBlackButton = ({
   onClick,
   paddingClassName = 'p-[20px] pb-[15px]',
   forceSquares = false,
+  disabled = false,
 }: {
   children: ReactNode;
   className?: string;
   onClick?: () => void;
   paddingClassName?: string;
   forceSquares?: boolean;
+  disabled?: boolean;
 }) => {
   return (
     <div
       className={classes(
         'bg-squares-grid bg-black rounded-[8px]',
-        'cursor-pointer transition-all ring-0 hover:ring-1 ring-gray-700',
+        'transition-all ring-0 ring-gray-700',
+        !disabled && 'cursor-pointer hover:ring-1',
         className,
         paddingClassName,
         forceSquares && 'bg-squares-grid-squares',
       )}
-      onClick={onClick}
+      onClick={disabled ? () => {} : onClick}
     >
       {children}
     </div>

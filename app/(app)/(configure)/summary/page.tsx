@@ -1,5 +1,7 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -7,6 +9,7 @@ import { BigBlackButton } from '@/components/buttons/BigBlackButton';
 import { Button } from '@/components/buttons/Button';
 import { LearnMore } from '@/components/buttons/LearnMore';
 import { clickableClasses } from '@/components/buttons/styling';
+import { Check } from '@/components/icons/Check';
 import { StatusLight } from '@/components/icons/StatusLight';
 import { ActionPanel } from '@/components/panels/ActionPanel';
 import { DescriptionPanel } from '@/components/panels/DescriptionPanel';
@@ -76,6 +79,17 @@ export default function Summary() {
 
   const title = 'Summary';
   const backHref = fastMode ? 'start' : '/configure/refund';
+
+  // added indicator
+  const [addedToMetamask, setAddedToMetamask] = useState(false);
+  useEffect(() => {
+    // after 10 seconds, reset the added indicator
+    if (addedToMetamask) {
+      const timeout = setTimeout(() => setAddedToMetamask(false), 10000);
+      return () => clearTimeout(timeout);
+    }
+    return () => {};
+  }, [addedToMetamask]);
 
   return (
     <MobilePanel title={title} backHref={backHref}>
@@ -159,8 +173,9 @@ export default function Summary() {
       >
         <BigBlackButton
           forceSquares
-          className="flex flex-row justify-center items-center gap-[10px]"
+          className="relative h-[58px] sm:h-[91px]"
           paddingClassName="py-[10px] sm:py-[26px]"
+          disabled={addedToMetamask}
           onClick={() => {
             const provider = (window as any).ethereum;
             if (provider && provider.isMetaMask) {
@@ -183,8 +198,8 @@ export default function Summary() {
                 })
                 .then((res: any) => {
                   // metamask will return null if chain is added
-                  if (!res) {
-                    alert('Flashbots Protect added to Metamask');
+                  if (res === null) {
+                    setAddedToMetamask(true);
                   }
                 })
                 .catch((error: any) => {
@@ -199,21 +214,51 @@ export default function Summary() {
             }
           }}
         >
-          <Image
-            src="/icons/metamask.png"
-            height={38}
-            width={38}
-            alt="metamask"
-            className="scale-90 sm:scale-100"
-          />
           <div
             className={classes(
-              'text-white font-medium leading-[33px]',
-              'text-[24px] sm:text-[27px]',
-              'tracking-[-0.48px] sm:tracking-[-0.54px]',
+              'w-full',
+              'absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2',
+              'flex flex-row justify-center items-center gap-[6px]',
+              'transition-all duration-500',
+              addedToMetamask ? 'opacity-100 delay-500' : 'opacity-0 delay-0',
             )}
           >
-            Add to Metamask
+            <Check size={38} color={'#0BDA51'} />
+            <div
+              className={classes(
+                'text-white font-medium leading-[33px]',
+                'text-[24px] sm:text-[27px]',
+                'tracking-[-0.48px] sm:tracking-[-0.54px]',
+              )}
+            >
+              Added to Metamask
+            </div>
+          </div>
+          <div
+            className={classes(
+              'w-full',
+              'absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2',
+              'flex flex-row justify-center items-center gap-[10px]',
+              'transition-all duration-500',
+              addedToMetamask ? 'opacity-0 delay-0' : 'opacity-100 delay-500',
+            )}
+          >
+            <Image
+              src="/icons/metamask.png"
+              height={38}
+              width={38}
+              alt="metamask"
+              className="scale-90 sm:scale-100"
+            />
+            <div
+              className={classes(
+                'text-white font-medium leading-[33px]',
+                'text-[24px] sm:text-[27px]',
+                'tracking-[-0.48px] sm:tracking-[-0.54px]',
+              )}
+            >
+              Add to Metamask
+            </div>
           </div>
         </BigBlackButton>
 
