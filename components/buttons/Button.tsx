@@ -13,13 +13,15 @@ export const Button = ({
   className,
   type = 'primary-black',
   style,
+  target,
 }: {
   children: ReactNode;
   onClick?: () => void;
   href?: string;
   className?: string;
-  type?: 'primary-black' | 'primary-white' | 'secondary';
+  type?: 'primary-black' | 'primary-white' | 'secondary' | 'tertiary';
   style?: CSSProperties;
+  target?: string;
 }) => {
   const buttonClasses = classes(
     'w-full rounded-[8px]',
@@ -31,6 +33,8 @@ export const Button = ({
     type === 'primary-white' && 'bg-black bg-white text-black h-[46px]',
     type === 'secondary' &&
       'border-black bg-white text-black h-[39px] border-opacity-10',
+    type === 'tertiary' &&
+      'border-black border-opacity-10 bg-black bg-opacity-10 text-black h-[48px]',
     'leading-[18px]',
     'flex flex-row items-center justify-center',
     clickableClasses,
@@ -39,7 +43,7 @@ export const Button = ({
 
   if (href) {
     return (
-      <Link href={href} style={style}>
+      <Link href={href} style={style} target={target}>
         <div className={classes(buttonClasses, className)}>{children}</div>
       </Link>
     );

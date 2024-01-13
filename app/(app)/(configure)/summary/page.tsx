@@ -62,21 +62,6 @@ export default function Summary() {
     return rpcUrl;
   };
 
-  // turn off because we don't have user address for refund and user cannot change refund likelihood (?)
-  // does fast mode increase refund likelihood?
-  // const supportedBuilders = useSupportedBuilders();
-  // useEffect(() => {
-  //   if (fastMode) {
-  //     // default refund is 50%
-  //     setRefundShare(50);
-  //     // default builders are all
-  //     setBuilders(
-  //       supportedBuilders.map((builder) => builder.name) ||
-  //         alwaysSelectedBuilders,
-  //     );
-  //   }
-  // }, [fastMode, setRefundShare, setBuilders, supportedBuilders]);
-
   const title = 'Summary';
   const backHref = fastMode ? 'start' : '/configure/refund';
 
@@ -90,6 +75,9 @@ export default function Summary() {
     }
     return () => {};
   }, [addedToMetamask]);
+
+  // troubleshooting popup
+  const [showTroubleshooting, setShowTroubleshooting] = useState(false);
 
   return (
     <MobilePanel title={title} backHref={backHref}>
@@ -262,12 +250,94 @@ export default function Summary() {
           </div>
         </BigBlackButton>
 
-        <div className="flex flex-row items-center gap-[7.5px] my-[11px] sm:my-[6px]">
+        <div className="flex flex-row items-center gap-[7.5px] my-[11px]">
           <div className="grow border-b-[1px] h-1 border-b-black border-opacity-10"></div>
-          <div className="text-black text-opacity-50 text-base font-normal tracking-[-0.32px]">
-            or
+          <div
+            className={classes(
+              'text-black',
+              'opacity-50 hover:opacity-75 cursor-pointer transition-all',
+              'text-base font-normal tracking-[-0.32px] flex flex-row items-center',
+              'leading-[33px]',
+            )}
+            onClick={() => setShowTroubleshooting(true)}
+          >
+            <Image
+              src="/icons/question.svg"
+              height={20}
+              width={20}
+              alt="metamask"
+              className="mr-[7.25px]"
+            />
+            I&rsquo;m having issues
           </div>
           <div className="grow border-b-[1px] h-1 border-b-black border-opacity-10"></div>
+        </div>
+        <div
+          className={classes(
+            'fixed sm:absolute',
+            'w-full top-0 left-0',
+            'transform sm:transition-transform transition-colors duration-[50s]',
+            showTroubleshooting ? 'translate-y-0' : 'translate-y-full',
+            'h-dvh sm:h-full',
+            'p-[19px]',
+            'flex flex-col justify-end',
+            'z-50',
+            'bg-black sm:bg-transparent bg-opacity-10',
+          )}
+        >
+          <div
+            className={classes(
+              'w-full',
+              'bg-white rounded-[10px] border border-black border-opacity-20',
+              'shadow sm:shadow-none',
+              'px-[23px] py-[17px]',
+              'transition-all sm:transition-none',
+              showTroubleshooting
+                ? 'translate-y-0'
+                : 'translate-y-full sm:translate-y-0',
+            )}
+          >
+            <div
+              className={classes(
+                'text-black font-medium mb-[9px] tracking-[-2%]',
+                'text-[30px] sm:text-[24px]',
+                'leading-[33px] sm:leading-[27px]',
+              )}
+            >
+              Troubleshooting
+            </div>
+            <div
+              className={classes(
+                'opacity-75 text-black font-normal tracking-[-2%] mb-[32px]',
+                'text-[19px] sm:text-[16px]',
+                'leading-[22px] sm:leading-[19px]',
+              )}
+            >
+              If you aren&apos;t prompted to add Protect to your wallet, you may
+              already have added it. If not, try following the guide to add
+              Protect manually, or reinstall the Metamask extension if you
+              continue to have issues.
+            </div>
+            <div className="flex flex-row items-center gap-[10px]">
+              <div className="flex-1">
+                <Button
+                  type={'primary-black'}
+                  onClick={() => setShowTroubleshooting(false)}
+                >
+                  Close
+                </Button>
+              </div>
+              <div className="flex-1">
+                <Button
+                  type={'tertiary'}
+                  href="https://flashbots.notion.site/Protect-Wallet-Guide-a929230357b64d9aaf66d2edc8b2dd5c"
+                  target="_blank"
+                >
+                  View guide
+                </Button>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div
