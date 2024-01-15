@@ -1,5 +1,7 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -7,6 +9,7 @@ import { BigBlackButton } from '@/components/buttons/BigBlackButton';
 import { Button } from '@/components/buttons/Button';
 import { LearnMore } from '@/components/buttons/LearnMore';
 import { clickableClasses } from '@/components/buttons/styling';
+import { Check } from '@/components/icons/Check';
 import { StatusLight } from '@/components/icons/StatusLight';
 import { ActionPanel } from '@/components/panels/ActionPanel';
 import { DescriptionPanel } from '@/components/panels/DescriptionPanel';
@@ -59,23 +62,22 @@ export default function Summary() {
     return rpcUrl;
   };
 
-  // turn off because we don't have user address for refund and user cannot change refund likelihood (?)
-  // does fast mode increase refund likelihood?
-  // const supportedBuilders = useSupportedBuilders();
-  // useEffect(() => {
-  //   if (fastMode) {
-  //     // default refund is 50%
-  //     setRefundShare(50);
-  //     // default builders are all
-  //     setBuilders(
-  //       supportedBuilders.map((builder) => builder.name) ||
-  //         alwaysSelectedBuilders,
-  //     );
-  //   }
-  // }, [fastMode, setRefundShare, setBuilders, supportedBuilders]);
-
   const title = 'Summary';
   const backHref = fastMode ? 'start' : '/configure/refund';
+
+  // added indicator
+  const [addedToMetamask, setAddedToMetamask] = useState(false);
+  useEffect(() => {
+    // after 10 seconds, reset the added indicator
+    if (addedToMetamask) {
+      const timeout = setTimeout(() => setAddedToMetamask(false), 10000);
+      return () => clearTimeout(timeout);
+    }
+    return () => {};
+  }, [addedToMetamask]);
+
+  // troubleshooting popup
+  const [showTroubleshooting, setShowTroubleshooting] = useState(false);
 
   return (
     <MobilePanel title={title} backHref={backHref}>
@@ -159,11 +161,12 @@ export default function Summary() {
       >
         <BigBlackButton
           forceSquares
-          className="flex flex-row justify-center items-center gap-[10px]"
+          className="relative h-[58px] sm:h-[91px]"
           paddingClassName="py-[10px] sm:py-[26px]"
+          disabled={addedToMetamask}
           onClick={() => {
             const provider = (window as any).ethereum;
-            if (provider) {
+            if (provider && provider.isMetaMask) {
               const addChainParams = {
                 chainId: ETH_CHAIN_ID,
                 chainName: `Flashbots Protect (${ETH_CHAIN_NAME})`,
@@ -181,9 +184,16 @@ export default function Summary() {
                   method: 'wallet_addEthereumChain',
                   params: [addChainParams],
                 })
+                .then((res: any) => {
+                  // metamask will return null if chain is added
+                  if (res === null) {
+                    setAddedToMetamask(true);
+                  }
+                })
                 .catch((error: any) => {
                   // ignore 4001 "user rejected request" error code
                   if (error.code !== 4001) {
+                    console.error(error);
                     alert(`Error ${error.code}: ${error.message}`);
                   }
                 });
@@ -192,30 +202,142 @@ export default function Summary() {
             }
           }}
         >
-          <Image
-            src="/icons/metamask.png"
-            height={38}
-            width={38}
-            alt="metamask"
-            className="scale-90 sm:scale-100"
-          />
           <div
             className={classes(
-              'text-white font-medium leading-[33px]',
-              'text-[24px] sm:text-[27px]',
-              'tracking-[-0.48px] sm:tracking-[-0.54px]',
+              'w-full',
+              'absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2',
+              'flex flex-row justify-center items-center gap-[6px]',
+              'transition-all duration-500',
+              addedToMetamask ? 'opacity-100 delay-500' : 'opacity-0 delay-0',
             )}
           >
-            Add to Metamask
+            <Check size={38} color={'#0BDA51'} />
+            <div
+              className={classes(
+                'text-white font-medium leading-[33px]',
+                'text-[24px] sm:text-[27px]',
+                'tracking-[-0.48px] sm:tracking-[-0.54px]',
+              )}
+            >
+              Added to Metamask
+            </div>
+          </div>
+          <div
+            className={classes(
+              'w-full',
+              'absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2',
+              'flex flex-row justify-center items-center gap-[10px]',
+              'transition-all duration-500',
+              addedToMetamask ? 'opacity-0 delay-0' : 'opacity-100 delay-500',
+            )}
+          >
+            <Image
+              src="/icons/metamask.png"
+              height={38}
+              width={38}
+              alt="metamask"
+              className="scale-90 sm:scale-100"
+            />
+            <div
+              className={classes(
+                'text-white font-medium leading-[33px]',
+                'text-[24px] sm:text-[27px]',
+                'tracking-[-0.48px] sm:tracking-[-0.54px]',
+              )}
+            >
+              Add to Metamask
+            </div>
           </div>
         </BigBlackButton>
 
-        <div className="flex flex-row items-center gap-[7.5px] my-[11px] sm:my-[6px]">
+        <div className="flex flex-row items-center gap-[7.5px] my-[11px]">
           <div className="grow border-b-[1px] h-1 border-b-black border-opacity-10"></div>
-          <div className="text-black text-opacity-50 text-base font-normal tracking-[-0.32px]">
-            or
+          <div
+            className={classes(
+              'text-black',
+              'opacity-50 hover:opacity-75 cursor-pointer transition-all',
+              'text-base font-normal tracking-[-0.32px] flex flex-row items-center',
+              'leading-[33px]',
+            )}
+            onClick={() => setShowTroubleshooting(true)}
+          >
+            <Image
+              src="/icons/question.svg"
+              height={20}
+              width={20}
+              alt="metamask"
+              className="mr-[7.25px]"
+            />
+            I&rsquo;m having issues
           </div>
           <div className="grow border-b-[1px] h-1 border-b-black border-opacity-10"></div>
+        </div>
+        <div
+          className={classes(
+            'fixed sm:absolute',
+            'w-full top-0 left-0',
+            'transform sm:transition-transform transition-colors duration-[50s]',
+            showTroubleshooting ? 'translate-y-0' : 'translate-y-full',
+            'h-dvh sm:h-full',
+            'p-[19px]',
+            'flex flex-col justify-end',
+            'z-50',
+            'bg-black sm:bg-transparent bg-opacity-10',
+          )}
+        >
+          <div
+            className={classes(
+              'w-full',
+              'bg-white rounded-[10px] border border-black border-opacity-20',
+              'shadow sm:shadow-none',
+              'px-[23px] py-[17px]',
+              'transition-all sm:transition-none',
+              showTroubleshooting
+                ? 'translate-y-0'
+                : 'translate-y-full sm:translate-y-0',
+            )}
+          >
+            <div
+              className={classes(
+                'text-black font-medium mb-[9px] tracking-[-2%]',
+                'text-[30px] sm:text-[24px]',
+                'leading-[33px] sm:leading-[27px]',
+              )}
+            >
+              Troubleshooting
+            </div>
+            <div
+              className={classes(
+                'opacity-75 text-black font-normal tracking-[-2%] mb-[32px]',
+                'text-[19px] sm:text-[16px]',
+                'leading-[22px] sm:leading-[19px]',
+              )}
+            >
+              If you aren&apos;t prompted to add Protect to your wallet, you may
+              already have added it. If not, try following the guide to add
+              Protect manually, or reinstall the Metamask extension if you
+              continue to have issues.
+            </div>
+            <div className="flex flex-row items-center gap-[10px]">
+              <div className="flex-1">
+                <Button
+                  type={'primary-black'}
+                  onClick={() => setShowTroubleshooting(false)}
+                >
+                  Close
+                </Button>
+              </div>
+              <div className="flex-1">
+                <Button
+                  type={'tertiary'}
+                  href="https://flashbots.notion.site/Protect-Wallet-Guide-a929230357b64d9aaf66d2edc8b2dd5c"
+                  target="_blank"
+                >
+                  View guide
+                </Button>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div

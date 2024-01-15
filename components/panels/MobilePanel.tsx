@@ -30,6 +30,7 @@ export const MobilePanel = ({
           'shadow-[0px_4px_74px_0px_rgba(0,0,0,0.07)] sm:shadow-[0px_2px_14px_0px_rgba(0,0,0,0.05)]',
           'sm:h-[409px]',
           'justify-between',
+          'relative',
         )}
       >
         {children}

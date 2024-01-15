@@ -20,6 +20,7 @@ export const ActionPanel = ({
         'p-[20px] pt-[9px] sm:pt-[18px]',
         'border-black border-opacity-15',
         'max-h-[385px] sm:max-h-full',
+        'sm:relative',
       )}
     >
       {children}
