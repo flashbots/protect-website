@@ -59,7 +59,7 @@ export default function About() {
               width={15}
               className="flex sm:hidden mr-[10px]"
             />
-            Get Protected
+            Get protected
           </Button>
         </div>
       </div>

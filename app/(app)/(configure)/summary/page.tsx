@@ -7,7 +7,6 @@ import Link from 'next/link';
 
 import { BigBlackButton } from '@/components/buttons/BigBlackButton';
 import { Button } from '@/components/buttons/Button';
-import { LearnMore } from '@/components/buttons/LearnMore';
 import { clickableClasses } from '@/components/buttons/styling';
 import { Check } from '@/components/icons/Check';
 import { StatusLight } from '@/components/icons/StatusLight';
@@ -351,12 +350,19 @@ export default function Summary() {
             Other wallets
           </div>
           <div className="opacity-50 text-black text-base font-normal tracking-[-0.32px] leading-[19px] mb-[8px]">
-            For other wallets, follow this guide.
+            For wallets besides Metamask, follow the help guide below.
           </div>
-          <LearnMore
+          <Button
+            type="secondary"
+            className="mt-[10px] active:border-t-[3px]"
             href="https://flashbots.notion.site/Protect-Wallet-Guide-a929230357b64d9aaf66d2edc8b2dd5c"
-            textSize={16}
-          />
+            target="_blank"
+          >
+            <Image src="/icons/book.svg" height={18} width={18} alt="copy" />
+            <div className="text-black text-base font-medium tracking-[-0.32px] leading-[33px] ml-[8px]">
+              Help guide
+            </div>
+          </Button>
           <Button
             type="secondary"
             className="mt-[10px] active:border-t-[3px]"
@@ -366,7 +372,7 @@ export default function Summary() {
           >
             <Image src="/icons/copy.svg" height={16} width={15} alt="copy" />
             <div className="text-black text-base font-medium tracking-[-0.32px] leading-[33px] ml-[8px]">
-              Copy your Protect URL
+              Copy RPC URL
             </div>
           </Button>
         </div>

@@ -25,7 +25,7 @@ export default function Home() {
         )}
       >
         <Image
-          src="/hero-animation.gif"
+          src="/animation.gif"
           alt="animation"
           fill
           style={{ objectFit: 'cover', objectPosition: 'center' }}
@@ -66,7 +66,7 @@ export default function Home() {
               className="mr-[6px]"
               sizes="(max-width: 728px) 100vw, 320px"
             />
-            Get Protected
+            Get protected
           </Button>
           <div className="flex flex-row items-center gap-[21px]">
             <div className="flex-1">
