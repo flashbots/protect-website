@@ -91,7 +91,7 @@ export default function Home() {
                   <span className="inline sm:hidden opacity-80">
                     Over&nbsp;
                   </span>
-                  <span className="">100&nbsp;</span>
+                  <span className="">190&nbsp;</span>
                   <span className="opacity-80">ETH</span>
                 </div>
               </div>
