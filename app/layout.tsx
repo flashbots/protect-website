@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     siteName: 'Protect',
     images: [
       {
-        url: '/og-image.png',
+        url: 'https://protect.flashbots.net/og-image.png',
       },
     ],
   },
