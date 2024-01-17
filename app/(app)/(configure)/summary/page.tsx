@@ -66,14 +66,19 @@ export default function Summary() {
 
   // added indicator
   const [addedToMetamask, setAddedToMetamask] = useState(false);
+  const [copiedToClipboard, setCopiedToClipboard] = useState(false);
   useEffect(() => {
     // after 10 seconds, reset the added indicator
     if (addedToMetamask) {
       const timeout = setTimeout(() => setAddedToMetamask(false), 10000);
       return () => clearTimeout(timeout);
     }
+    if (copiedToClipboard) {
+      const timeout = setTimeout(() => setCopiedToClipboard(false), 2500);
+      return () => clearTimeout(timeout);
+    }
     return () => {};
-  }, [addedToMetamask]);
+  }, [addedToMetamask, copiedToClipboard]);
 
   // troubleshooting popup
   const [showTroubleshooting, setShowTroubleshooting] = useState(false);
@@ -366,13 +371,27 @@ export default function Summary() {
           <Button
             type="secondary"
             className="mt-[10px] active:border-t-[3px]"
-            onClick={() =>
-              navigator.clipboard.writeText(constructRpcUrl().toString())
-            }
+            onClick={() => {
+              navigator.clipboard.writeText(constructRpcUrl().toString());
+              setCopiedToClipboard(true);
+            }}
           >
             <Image src="/icons/copy.svg" height={16} width={15} alt="copy" />
-            <div className="text-black text-base font-medium tracking-[-0.32px] leading-[33px] ml-[8px]">
+            <div
+              className={classes(
+                `text-black text-base font-medium tracking-[-0.32px] leading-[33px] ml-[8px]`,
+                copiedToClipboard ? `hidden` : `visible opacity-100`,
+              )}
+            >
               Copy RPC URL
+            </div>
+            <div
+              className={classes(
+                `text-black text-base font-medium tracking-[-0.32px] leading-[33px] ml-[8px]`,
+                copiedToClipboard ? `visible opacity-50 delay-500` : `hidden`,
+              )}
+            >
+              Copied!
             </div>
           </Button>
         </div>
