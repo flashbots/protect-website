@@ -18,11 +18,11 @@ import { alwaysSelectedHints, Hints, useURLState } from '@/lib/useURLState';
 
 const hintOptions = [
   { value: Hints.logs, name: 'All logs' },
-  { value: Hints.defaultLogs, name: 'Default Logs' },
+  { value: Hints.defaultLogs, name: 'Default logs' },
   { value: Hints.contractAddress, name: 'Contract' },
   { value: Hints.hash, name: 'Hash' },
   { value: Hints.calldata, name: 'Calldata' },
-  { value: Hints.functionSelector, name: 'Function Selector' },
+  { value: Hints.functionSelector, name: 'Function selector' },
 ];
 
 export default function Privacy() {
