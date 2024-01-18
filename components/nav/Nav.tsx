@@ -61,7 +61,7 @@ export const Nav = ({
           Protect
         </NavLink>
         <div className="w-[1px] bg-black bg-opacity-30 h-[16px]"></div>
-        <NavLink isActive={false} href="https://docs.flashbots.net/">
+        <NavLink isActive={false} href="https://docs.flashbots.net/flashbots-protect/overview">
           Documentation
         </NavLink>
       </div>
@@ -131,7 +131,7 @@ export const Nav = ({
             About
           </NavLink>
 
-          <NavLink isActive={false} href="https://docs.flashbots.net/">
+          <NavLink isActive={false} href="https://docs.flashbots.net/flashbots-protect/overview">
             Documentation
           </NavLink>
 
