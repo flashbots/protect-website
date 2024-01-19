@@ -202,7 +202,9 @@ export default function Summary() {
                   }
                 });
             } else {
-              alert('Metamask not found. Check if you have installed the Metamask browser extension. If you are on a mobile device, try switching to desktop.');
+              alert(
+                'Metamask not found. Check if you have installed the Metamask browser extension. If you are on a mobile device, try switching to desktop.',
+              );
             }
           }}
         >
