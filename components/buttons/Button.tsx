@@ -24,7 +24,7 @@ export const Button = ({
   target?: string;
 }) => {
   const buttonClasses = classes(
-    'w-full rounded-[8px]',
+    'w-full rounded-lg',
     'transition-all',
     'text-[20px] shrink-0',
     'font-medium',

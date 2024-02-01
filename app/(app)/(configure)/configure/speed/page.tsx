@@ -20,6 +20,8 @@ import { alwaysSelectedBuilders, useURLState } from '@/lib/useURLState';
 export default function Speed() {
   const supportedBuilders = useSupportedBuilders();
   const [selectAllBuilders, setSelectAllBuilders] = useState<boolean>(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const buildersPerPage = 10; // Adjust based on your UI
   const router = useRouter();
   const { backToSummary, urlParams, builders, setBuilders, fastMode } =
     useURLState();
@@ -35,6 +37,23 @@ export default function Speed() {
       setBuilders(supportedBuilders.map((builder) => builder.name));
     }
   }, [selectAllBuilders, supportedBuilders, setBuilders]);
+
+  // Calculate the total number of pages
+  const totalPages =
+    supportedBuilders.length > 0
+      ? Math.ceil(supportedBuilders.length / buildersPerPage)
+      : 1;
+
+  // Slice the supportedBuilders array to only include the builders for the current page
+  const currentBuilders = supportedBuilders.slice(
+    (currentPage - 1) * buildersPerPage,
+    currentPage * buildersPerPage,
+  );
+
+  // Function to change page
+  const goToPage = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+  };
 
   const title = 'Speed';
   const backHref = backToSummary ? '/summary' : '/start';
@@ -86,9 +105,9 @@ export default function Speed() {
             </div>
           </Checkbox>
         </div>
-        <div className="flex flex-col flex-wrap gap-y-[14px] gap-x-[24px] overflow-scroll pl-2 min-h-[166px]">
-          {supportedBuilders.map((builder) => (
-            <div key={builder.name} className="w-[50%]">
+        <div className="grid grid-cols-2 flex-wrap gap-y-[14px] gap-x-[24px] pl-2 h-[188px] pb-[14px]">
+          {currentBuilders.map((builder) => (
+            <div key={builder.name}>
               <Checkbox
                 checked={builders.includes(builder.name)}
                 onChange={(checked) => {
@@ -118,9 +137,46 @@ export default function Speed() {
               </Checkbox>
             </div>
           ))}
+          {/* Render placeholders to ensure consistent height */}
+          {Array.from({ length: 10 - currentBuilders.length }, (_, index) => (
+            <div
+              key={`placeholder-${index}`}
+              className="opacity-0 w-full h-[22px]"
+            >
+              {/* Placeholder with the same styling as builder elements */}
+            </div>
+          ))}
+        </div>
+        <div className="flex justify-center space-x-1 -mt-2">
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+            (pageNumber) => (
+              <div
+                key={pageNumber}
+                role="button"
+                tabIndex={0} // Make it focusable
+                aria-label={`Go to page ${pageNumber}`}
+                onClick={() => goToPage(pageNumber)}
+                onKeyDown={(event) => {
+                  // Make it accessible with keyboard
+                  if (event.key === 'Enter' || event.key === ' ') {
+                    goToPage(pageNumber);
+                  }
+                }}
+                className="w-3 h-5 inline-flex items-center cursor-pointer"
+              >
+                <div
+                  className={`w-3 h-1 rounded-lg ${
+                    currentPage === pageNumber
+                      ? 'bg-black'
+                      : 'bg-black bg-opacity-30'
+                  }`}
+                />
+              </div>
+            ),
+          )}
         </div>
         <Button
-          className="mt-[22px] sm:mt-[32px]"
+          className="mt-2 sm:mt-3"
           onClick={() => {
             router.push(
               backToSummary
