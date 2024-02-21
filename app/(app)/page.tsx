@@ -76,7 +76,7 @@ export default function Home() {
               <div className="text-[25px] font-[500] tracking-[-0.5px] leading-[18px]">
                 <span className="hidden sm:inline opacity-80">&gt;</span>
                 <span className="inline sm:hidden opacity-80">Over&nbsp;</span>
-                <span className="">6.8&nbsp;</span>
+                <span className="">7.2&nbsp;</span>
                 <span className="opacity-80">million</span>
               </div>
             </div>
@@ -91,7 +91,7 @@ export default function Home() {
                   <span className="inline sm:hidden opacity-80">
                     Over&nbsp;
                   </span>
-                  <span className="">200&nbsp;</span>
+                  <span className="">220&nbsp;</span>
                   <span className="opacity-80">ETH</span>
                 </div>
               </div>
