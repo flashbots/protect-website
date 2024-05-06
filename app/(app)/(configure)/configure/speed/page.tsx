@@ -17,6 +17,8 @@ import { classes } from '@/lib/classes';
 import { useSupportedBuilders } from '@/lib/useSupportedBuilders';
 import { alwaysSelectedBuilders, useURLState } from '@/lib/useURLState';
 
+import Pagination from './pagination';
+
 export default function Speed() {
   const supportedBuilders = useSupportedBuilders();
   const [selectAllBuilders, setSelectAllBuilders] = useState<boolean>(false);
@@ -167,31 +169,11 @@ export default function Speed() {
             ),
           )}
         </div>
-        <div className="flex justify-center space-x-1 -mt-2">
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map(
-            (pageNumber) => (
-              <button
-                key={pageNumber}
-                aria-label={`Go to page ${pageNumber}`}
-                onClick={() => goToPage(pageNumber)}
-                onKeyDown={(event) => {
-                  if (event.key === 'Enter' || event.key === ' ') {
-                    goToPage(pageNumber);
-                  }
-                }}
-                className="w-3 h-5 inline-flex items-center cursor-pointer"
-              >
-                <div
-                  className={`w-3 h-1 rounded-lg ${
-                    currentPage === pageNumber
-                      ? 'bg-black'
-                      : 'bg-black bg-opacity-30'
-                  }`}
-                />
-              </button>
-            ),
-          )}
-        </div>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          goToPage={goToPage}
+        />
         <Button
           className="mt-2 sm:mt-3"
           onClick={() => {
