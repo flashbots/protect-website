@@ -21,7 +21,7 @@ export default function Speed() {
   const supportedBuilders = useSupportedBuilders();
   const [selectAllBuilders, setSelectAllBuilders] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const buildersPerPage = 10; // Adjust based on your UI
+  const buildersPerPage = 8; // Adjust based on your UI
   const router = useRouter();
   const { backToSummary, urlParams, builders, setBuilders, fastMode } =
     useURLState();
@@ -91,7 +91,7 @@ export default function Speed() {
             'flex flex-row items-center justify-between',
             'rounded-[8px] border border-black border-opacity-10 px-[15px]',
             'h-[48px] shrink-0',
-            'mb-[22px]',
+            'mb-[10px]',
             clickableClasses,
           )}
           onClick={() => setSelectAllBuilders((prev) => !prev)}
@@ -106,7 +106,23 @@ export default function Speed() {
             </div>
           </Checkbox>
         </div>
-        <div className="grid grid-cols-2 flex-wrap gap-y-[14px] gap-x-[24px] pl-2 h-[188px] pb-[14px]">
+        <div
+          className={classes(
+            'flex flex-row items-center justify-between',
+            'rounded-[8px] border border-black border-opacity-10 px-[15px]',
+            'h-[36px] shrink-0',
+            'mb-[24px]',
+            clickableClasses,
+          )}
+          onClick={() => setSelectAllBuilders((prev) => !prev)}
+        >
+          <Checkbox checked={true} onChange={() => {}} disabled={true}>
+            <div className="text-black text-[18px] leading-[18px] tracking-[-0.4px] ml-[12px]">
+              Smart multiplex to optimize refund
+            </div>
+          </Checkbox>
+        </div>
+        <div className="grid grid-cols-2 flex-wrap gap-y-[14px] gap-x-[24px] pl-2 h-[140px] pb-[14px]">
           {currentBuilders.map((builder) => (
             <div key={builder.name}>
               <Checkbox
@@ -139,26 +155,26 @@ export default function Speed() {
             </div>
           ))}
           {/* Render placeholders to ensure consistent height */}
-          {Array.from({ length: 10 - currentBuilders.length }, (_, index) => (
-            <div
-              key={`placeholder-${index}`}
-              className="opacity-0 w-full h-[22px]"
-            >
-              {/* Placeholder with the same styling as builder elements */}
-            </div>
-          ))}
+          {Array.from(
+            { length: buildersPerPage - currentBuilders.length },
+            (_, index) => (
+              <div
+                key={`placeholder-${index}`}
+                className="opacity-0 w-full h-[22px]"
+              >
+                {/* Placeholder with the same styling as builder elements */}
+              </div>
+            ),
+          )}
         </div>
         <div className="flex justify-center space-x-1 -mt-2">
           {Array.from({ length: totalPages }, (_, i) => i + 1).map(
             (pageNumber) => (
-              <div
+              <button
                 key={pageNumber}
-                role="button"
-                tabIndex={0} // Make it focusable
                 aria-label={`Go to page ${pageNumber}`}
                 onClick={() => goToPage(pageNumber)}
                 onKeyDown={(event) => {
-                  // Make it accessible with keyboard
                   if (event.key === 'Enter' || event.key === ' ') {
                     goToPage(pageNumber);
                   }
@@ -172,7 +188,7 @@ export default function Speed() {
                       : 'bg-black bg-opacity-30'
                   }`}
                 />
-              </div>
+              </button>
             ),
           )}
         </div>
