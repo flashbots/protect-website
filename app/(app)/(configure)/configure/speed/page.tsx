@@ -114,7 +114,7 @@ export default function Speed() {
             'mb-[24px]',
             clickableClasses,
           )}
-          onClick={() => setSelectAllBuilders((prev) => !prev)}
+          onClick={() => {}}
         >
           <Checkbox checked={true} onChange={() => {}} disabled={true}>
             <div className="text-black text-[18px] leading-[18px] tracking-[-0.4px] ml-[12px]">
