@@ -11,6 +11,7 @@ import { Checkbox } from '@/components/inputs/Checkbox';
 import { ActionPanel } from '@/components/panels/ActionPanel';
 import { DescriptionPanel } from '@/components/panels/DescriptionPanel';
 import { MobilePanel } from '@/components/panels/MobilePanel';
+import { StatusBar } from '@/components/panels/StatusBar';
 import { DescriptionText } from '@/components/text/DescriptionText';
 import { FormHint } from '@/components/text/FormHint';
 import { classes } from '@/lib/classes';
@@ -25,8 +26,14 @@ export default function Speed() {
   const [currentPage, setCurrentPage] = useState(1);
   const buildersPerPage = 10; // Adjust based on your UI
   const router = useRouter();
-  const { backToSummary, urlParams, builders, setBuilders, fastMode } =
-    useURLState();
+  const {
+    backToSummary,
+    urlParams,
+    builders,
+    setBuilders,
+    fastMode,
+    speedScore,
+  } = useURLState();
 
   useEffect(() => {
     if (fastMode) {
@@ -69,6 +76,7 @@ export default function Speed() {
           totalDots: 4,
         }}
         backHref={backHref}
+        bottomBar={<StatusBar status={speedScore}>Inclusion Speed</StatusBar>}
       >
         <DescriptionText>
           Transaction confirmation speed depends on the number of builders you
