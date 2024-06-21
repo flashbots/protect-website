@@ -113,7 +113,7 @@ export default function Summary() {
                       'px-[16px] rounded-[8px]',
                       'h-[48px] shrink-0',
                       'flex flex-row items-center justify-between',
-                      'hover:bg-gray-100',
+                      'hover:bg-neutral-100',
                       clickableClasses,
                     )}
                   >
