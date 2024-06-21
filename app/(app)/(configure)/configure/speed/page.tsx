@@ -71,17 +71,13 @@ export default function Speed() {
         backHref={backHref}
       >
         <DescriptionText>
-          How quickly your transactions are confirmed onchain depends on how
-          many builders you share them with.
-        </DescriptionText>
-        <DescriptionText>
-          Select more builders to have your transactions land more quickly.
+          Transaction confirmation speed depends on the number of builders you
+          share them with. Select more builders for faster confirmation.
         </DescriptionText>
         <DescriptionText textOpacityClass="text-opacity-50">
-          Note: Transactions are shared no later than one block after they are
-          received. When you send your transaction to another builder, you
-          entrust them not to frontrun your transaction or disclose it to third
-          parties who might.
+          Note: Transactions are shared within one block. By sending your
+          transaction to another builder, you trust them not to frontrun or
+          disclose it to third parties.
         </DescriptionText>
         <LearnMore href="https://docs.flashbots.net/flashbots-protect/mev-share#builders" />
       </DescriptionPanel>
