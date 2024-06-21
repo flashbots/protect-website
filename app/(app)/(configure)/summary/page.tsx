@@ -33,14 +33,14 @@ export default function Summary() {
 
   const summaryScores = [
     {
-      text: 'Privacy',
-      url: '/configure/privacy',
-      status: privacyScore,
-    },
-    {
       text: 'Speed',
       url: '/configure/speed',
       status: speedScore,
+    },
+    {
+      text: 'Privacy',
+      url: '/configure/privacy',
+      status: privacyScore,
     },
     {
       text: 'Refund Likelihood',
@@ -110,7 +110,7 @@ export default function Summary() {
                 >
                   <div
                     className={classes(
-                      'border border-black border-opacity-10 px-[17px] rounded-[12px]',
+                      'px-[17px] rounded-[12px]',
                       'h-[47px] shrink-0',
                       'flex flex-row items-center justify-between',
                       clickableClasses,
