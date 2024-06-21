@@ -96,9 +96,9 @@ export default function Summary() {
         <div className="h-full flex flex-col justify-between">
           <div
             className={classes(
-              'border border-black sm:border-opacity-10 sm:p-[16px] sm:rounded-[12px]',
-              'flex flex-col gap-[9px]',
-              'border-opacity-0 p-0 rounded-0',
+              'border border-black sm:border-opacity-10 sm:rounded-[12px]',
+              'flex flex-col',
+              'p-[4px] rounded-0',
               'ml-[-7px]',
             )}
           >
@@ -110,9 +110,10 @@ export default function Summary() {
                 >
                   <div
                     className={classes(
-                      'px-[17px] rounded-[12px]',
-                      'h-[47px] shrink-0',
+                      'px-[16px] rounded-[8px]',
+                      'h-[48px] shrink-0',
                       'flex flex-row items-center justify-between',
+                      'hover:bg-gray-100',
                       clickableClasses,
                     )}
                   >
