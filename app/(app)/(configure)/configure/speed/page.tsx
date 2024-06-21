@@ -23,7 +23,7 @@ export default function Speed() {
   const supportedBuilders = useSupportedBuilders();
   const [selectAllBuilders, setSelectAllBuilders] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const buildersPerPage = 8; // Adjust based on your UI
+  const buildersPerPage = 10; // Adjust based on your UI
   const router = useRouter();
   const { backToSummary, urlParams, builders, setBuilders, fastMode } =
     useURLState();
@@ -89,7 +89,7 @@ export default function Speed() {
             'flex flex-row items-center justify-between',
             'rounded-[8px] border border-black border-opacity-10 px-[15px]',
             'h-[48px] shrink-0',
-            'mb-[10px]',
+            'mb-[22px]',
             clickableClasses,
           )}
           onClick={() => setSelectAllBuilders((prev) => !prev)}
@@ -104,23 +104,7 @@ export default function Speed() {
             </div>
           </Checkbox>
         </div>
-        <div
-          className={classes(
-            'flex flex-row items-center justify-between',
-            'rounded-[8px] border border-black border-opacity-10 px-[15px]',
-            'h-[36px] shrink-0',
-            'mb-[24px]',
-            clickableClasses,
-          )}
-          onClick={() => {}}
-        >
-          <Checkbox checked={true} onChange={() => {}} disabled={true}>
-            <div className="text-black text-[18px] leading-[18px] tracking-[-0.4px] ml-[12px]">
-              Smart multiplex to optimize refund
-            </div>
-          </Checkbox>
-        </div>
-        <div className="grid grid-cols-2 flex-wrap gap-y-[14px] gap-x-[24px] pl-2 h-[140px] pb-[14px]">
+        <div className="grid grid-cols-2 flex-wrap gap-y-[14px] gap-x-[24px] pl-2 h-[188px] pb-[14px]">
           {currentBuilders.map((builder) => (
             <div key={builder.name}>
               <Checkbox
