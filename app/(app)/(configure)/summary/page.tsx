@@ -96,10 +96,9 @@ export default function Summary() {
         <div className="h-full flex flex-col justify-between">
           <div
             className={classes(
-              'border border-black sm:border-opacity-10 sm:rounded-[12px]',
+              'border border-black border-opacity-10 rounded-[12px]',
               'flex flex-col',
               'p-[4px] rounded-0',
-              'ml-[-7px]',
             )}
           >
             {summaryScores.map(({ text, status, url }, index) => {
