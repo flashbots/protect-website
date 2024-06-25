@@ -136,8 +136,8 @@ export default function Summary() {
               );
             })}
           </div>
-          <div>
-            <FormHint className="font-medium	flex">
+          <div className="my-4 sm:my-0">
+            <FormHint className="font-medium flex">
               Project Name
               <span className="ml-[4px] font-normal opacity-50">
                 (Optional)
