@@ -92,7 +92,7 @@ export const DescriptionPanel = ({
           {/* description text */}
           <div
             className={classes(
-              'p-[22px] pl-[29px] grow',
+              'p-[22px] grow',
               'pb-[11px] sm:pb-[22px]',
               'pt-[22px] sm:pt-0',
             )}

@@ -26,7 +26,7 @@ export default function Refund() {
     refundShare,
     setRefundShare,
     setBuilders,
-    speedScore,
+    refundScore,
     refundAddress,
     setRefundAddress,
     fastMode,
@@ -52,7 +52,9 @@ export default function Refund() {
           activeIndex: 2,
           totalDots: 4,
         }}
-        bottomBar={<StatusBar status={speedScore}>Inclusion Speed</StatusBar>}
+        bottomBar={
+          <StatusBar status={refundScore}>Refund Likelihood</StatusBar>
+        }
       >
         <DescriptionText>
           Protect will refund you if your transaction generates any value. You

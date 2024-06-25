@@ -33,14 +33,14 @@ export default function Summary() {
 
   const summaryScores = [
     {
-      text: 'Privacy',
-      url: '/configure/privacy',
-      status: privacyScore,
-    },
-    {
       text: 'Speed',
       url: '/configure/speed',
       status: speedScore,
+    },
+    {
+      text: 'Privacy',
+      url: '/configure/privacy',
+      status: privacyScore,
     },
     {
       text: 'Refund Likelihood',
@@ -96,10 +96,9 @@ export default function Summary() {
         <div className="h-full flex flex-col justify-between">
           <div
             className={classes(
-              'border border-black sm:border-opacity-10 sm:p-[16px] sm:rounded-[12px]',
-              'flex flex-col gap-[9px]',
-              'border-opacity-0 p-0 rounded-0',
-              'ml-[-7px]',
+              'border border-black border-opacity-10 rounded-[12px]',
+              'flex flex-col',
+              'p-[4px] rounded-0',
             )}
           >
             {summaryScores.map(({ text, status, url }, index) => {
@@ -110,9 +109,10 @@ export default function Summary() {
                 >
                   <div
                     className={classes(
-                      'border border-black border-opacity-10 px-[17px] rounded-[12px]',
-                      'h-[47px] shrink-0',
+                      'px-4 py-2 sm:py-1 rounded-lg',
+                      'shrink-0',
                       'flex flex-row items-center justify-between',
+                      'hover:bg-neutral-100',
                       clickableClasses,
                     )}
                   >
@@ -126,7 +126,7 @@ export default function Summary() {
                     </div>
                     <div className="flex flex-row items-center gap-2">
                       <StatusLight color={status.lightColor} />
-                      <div className="text-right text-black text-[24px] font-medium">
+                      <div className="text-right text-black text-[24px] sm:text-[20px] font-medium">
                         {status.text}
                       </div>
                     </div>
@@ -348,9 +348,9 @@ export default function Summary() {
 
         <div
           className={classes(
-            'bg-white border-black border-[1.5px] border-opacity-10',
+            'bg-white border-black border border-opacity-10',
             'rounded-[9px]',
-            'px-[18px] pt-[10px] pb-[16px]',
+            'p-4',
           )}
         >
           <div className="text-black text-[21px] font-medium tracking-[-0.42px] leading-[33px]">
