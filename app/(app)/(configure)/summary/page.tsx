@@ -13,6 +13,7 @@ import { StatusLight } from '@/components/icons/StatusLight';
 import { ActionPanel } from '@/components/panels/ActionPanel';
 import { DescriptionPanel } from '@/components/panels/DescriptionPanel';
 import { MobilePanel } from '@/components/panels/MobilePanel';
+import { FormHint } from '@/components/text/FormHint';
 import { classes } from '@/lib/classes';
 import { useURLState } from '@/lib/useURLState';
 
@@ -134,6 +135,31 @@ export default function Summary() {
                 </Link>
               );
             })}
+          </div>
+          <div>
+            <FormHint className="font-medium	flex">
+              Project Name
+              <span className="ml-[4px] font-normal opacity-50">
+                (Optional)
+              </span>
+              <Image
+                src="/icons/question.svg"
+                height={16}
+                width={16}
+                alt="metamask"
+                className="mr-[7.25px] ml-auto opacity-40 hover:opacity-60 cursor-pointer transition-all"
+              />
+            </FormHint>
+            <input
+              type="text"
+              className={classes(
+                'w-full h-[42px] border border-black border-opacity-10 rounded-[8px]',
+                'p-[10px]',
+                clickableClasses,
+                'cursor-pointer',
+              )}
+              placeholder="exampleProject"
+            ></input>
           </div>
           <div
             className={classes(
