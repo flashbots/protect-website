@@ -41,7 +41,7 @@ export default function Refund() {
       // all builders should be selected from fast mode defaults
       setBuilders(supportedBuilders.map((builder) => builder.name));
     }
-  }, [fastMode, supportedBuilders]);
+  }, [fastMode, supportedBuilders, setRefundShare, setBuilders]);
 
   return (
     <MobilePanel title={title} backHref={backHref}>

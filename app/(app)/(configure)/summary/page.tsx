@@ -205,7 +205,6 @@ export default function Summary() {
                 .catch((error: any) => {
                   // ignore 4001 "user rejected request" error code
                   if (error.code !== 4001) {
-                    console.error(error);
                     alert(`Error ${error.code}: ${error.message}`);
                   }
                 });
