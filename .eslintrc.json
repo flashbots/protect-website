@@ -1,6 +1,10 @@
 {
   // Configuration for JavaScript files
-  "extends": ["airbnb-base", "plugin:prettier/recommended"],
+  "extends": [
+    "airbnb-base",
+    "plugin:prettier/recommended",
+    "next/core-web-vitals" // Changed to match the TypeScript configuration
+  ],
   "rules": {
     "prettier/prettier": [
       "error",
