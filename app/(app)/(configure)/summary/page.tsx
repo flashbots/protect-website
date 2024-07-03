@@ -97,7 +97,7 @@ export default function Summary() {
         <div className="h-full flex flex-col justify-between">
           <div
             className={classes(
-              'border border-black sm:border-opacity-10 sm:p-[16px] sm:rounded-[12px]',
+              'border border-black sm:border-opacity-10 sm:p-[10px] sm:rounded-[12px]',
               'flex flex-col gap-[9px]',
               'border-opacity-0 p-0 rounded-0',
               'ml-[-7px]',
