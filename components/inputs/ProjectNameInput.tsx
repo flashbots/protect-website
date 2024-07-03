@@ -1,9 +1,9 @@
-import * as Tooltip from "@radix-ui/react-tooltip";
-import Image from "next/image";
+import * as Tooltip from '@radix-ui/react-tooltip';
+import Image from 'next/image';
 
-import { clickableClasses } from "@/components/buttons/styling";
-import { FormHint } from "@/components/text/FormHint";
-import { classes } from "@/lib/classes";
+import { clickableClasses } from '@/components/buttons/styling';
+import { FormHint } from '@/components/text/FormHint';
+import { classes } from '@/lib/classes';
 
 interface ProjectNameInputProps {
   value: string;
@@ -45,10 +45,10 @@ export function ProjectNameInput({ value, onChange }: ProjectNameInputProps) {
         value={value}
         onChange={(e) => onChange(e.target.value)}
         className={classes(
-          "w-full h-[42px] border border-black border-opacity-10 rounded-[8px]",
-          "p-[10px]",
+          'w-full h-[42px] border border-black border-opacity-10 rounded-[8px]',
+          'p-[10px]',
           clickableClasses,
-          "cursor-pointer"
+          'cursor-pointer',
         )}
         placeholder="exampleProject"
       />
