@@ -12,7 +12,7 @@ export const FormHint = ({
   return (
     <div
       className={classes(
-        'opacity-50 text-black text-[17px] font-normal leading-[33px] tracking-[-0.34px] mx-[6px]',
+        'text-black text-[17px] font-normal leading-[33px] tracking-[-0.34px] mx-[6px]',
         className,
       )}
     >

@@ -10,6 +10,7 @@ import { Button } from '@/components/buttons/Button';
 import { clickableClasses } from '@/components/buttons/styling';
 import { Check } from '@/components/icons/Check';
 import { StatusLight } from '@/components/icons/StatusLight';
+import { ProjectNameInput } from '@/components/inputs/ProjectNameInput';
 import { ActionPanel } from '@/components/panels/ActionPanel';
 import { DescriptionPanel } from '@/components/panels/DescriptionPanel';
 import { MobilePanel } from '@/components/panels/MobilePanel';
@@ -30,6 +31,8 @@ export default function Summary() {
     // setRefundShare,
     // setBuilders,
   } = useURLState();
+
+  const [projectName, setProjectName] = useState('');
 
   const summaryScores = [
     {
@@ -56,6 +59,10 @@ export default function Summary() {
       rpcUrl.pathname += 'fast';
     } else {
       rpcUrl.search = urlParams || '';
+    }
+
+    if (projectName) {
+      rpcUrl.searchParams.append('originId', projectName);
     }
 
     return rpcUrl;
@@ -96,7 +103,7 @@ export default function Summary() {
         <div className="h-full flex flex-col justify-between">
           <div
             className={classes(
-              'border border-black sm:border-opacity-10 sm:p-[16px] sm:rounded-[12px]',
+              'border border-black sm:border-opacity-10 sm:p-[10px] sm:rounded-[12px]',
               'flex flex-col gap-[9px]',
               'border-opacity-0 p-0 rounded-0',
               'ml-[-7px]',
@@ -135,6 +142,7 @@ export default function Summary() {
               );
             })}
           </div>
+          <ProjectNameInput value={projectName} onChange={setProjectName} />
           <div
             className={classes(
               'opacity-50 text-center marker:text-black text-sm font-normal tracking-[-0.28px] leading-[18px]',
@@ -197,7 +205,6 @@ export default function Summary() {
                 .catch((error: any) => {
                   // ignore 4001 "user rejected request" error code
                   if (error.code !== 4001) {
-                    console.error(error);
                     alert(`Error ${error.code}: ${error.message}`);
                   }
                 });
