@@ -28,7 +28,7 @@ const hintOptions = [
 export default function Privacy() {
   const router = useRouter();
 
-  const { backToSummary, urlParams, hints, setHints, refundScore } =
+  const { backToSummary, urlParams, hints, setHints, privacyScore } =
     useURLState();
 
   const title = 'Privacy';
@@ -43,9 +43,7 @@ export default function Privacy() {
           activeIndex: 1,
           totalDots: 4,
         }}
-        bottomBar={
-          <StatusBar status={refundScore}>Refund Likelihood</StatusBar>
-        }
+        bottomBar={<StatusBar status={privacyScore}>Privacy</StatusBar>}
       >
         <DescriptionText>
           You can control the visibility of your transaction data, and therefore
