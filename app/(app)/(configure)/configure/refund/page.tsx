@@ -129,31 +129,23 @@ export default function Refund() {
             <div>100%</div>
           </div>
 
-          <div
+          <FormHint className="mt-[12px] mb-[6px]">
+            Enter refund address (optional)
+          </FormHint>
+          <input
+            type="text"
+            value={refundAddress}
+            onChange={(e) => {
+              setRefundAddress(e.target.value);
+            }}
             className={classes(
-              refundAddress || refundShare !== defaultRefundShare
-                ? 'opacity-1 visible'
-                : 'opacity-0 invisible',
+              'w-full h-[42px] border border-black border-opacity-10 rounded-[8px]',
+              'p-[10px]',
+              clickableClasses,
+              'cursor-pointer',
             )}
-          >
-            <FormHint className="mt-[12px] mb-[6px]">
-              Enter refund address
-            </FormHint>
-            <input
-              type="text"
-              value={refundAddress}
-              onChange={(e) => {
-                setRefundAddress(e.target.value);
-              }}
-              className={classes(
-                'w-full h-[42px] border border-black border-opacity-10 rounded-[8px]',
-                'p-[10px]',
-                clickableClasses,
-                'cursor-pointer',
-              )}
-              placeholder="0x..."
-            ></input>
-          </div>
+            placeholder="0x..."
+          ></input>
         </div>
         <Button
           className="mt-[17px] sm:mt-[32px]"
