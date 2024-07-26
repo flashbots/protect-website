@@ -17,6 +17,8 @@ import { classes } from '@/lib/classes';
 import { useSupportedBuilders } from '@/lib/useSupportedBuilders';
 import { defaultRefundShare, useURLState } from '@/lib/useURLState';
 
+const FAST_MODE_DEFAULT_REFUND_SHARE = 50;
+
 export default function Refund() {
   const router = useRouter();
   const supportedBuilders = useSupportedBuilders();
@@ -35,9 +37,13 @@ export default function Refund() {
   const title = 'Refunds';
   const backHref = backToSummary ? '/summary' : '/configure/privacy';
 
+  const isRefundAddressOptional =
+    refundShare === defaultRefundShare ||
+    (fastMode && refundShare === FAST_MODE_DEFAULT_REFUND_SHARE);
+
   useEffect(() => {
     if (fastMode) {
-      setRefundShare(50);
+      setRefundShare(FAST_MODE_DEFAULT_REFUND_SHARE);
       // all builders should be selected from fast mode defaults
       setBuilders(supportedBuilders.map((builder) => builder.name));
     }
@@ -129,36 +135,42 @@ export default function Refund() {
             <div>100%</div>
           </div>
 
-          <div
+          <FormHint
             className={classes(
-              refundAddress || refundShare !== defaultRefundShare
-                ? 'opacity-1 visible'
-                : 'opacity-0 invisible',
+              'mt-[12px] mb-[6px]',
+              !isRefundAddressOptional ? 'text-red-500' : '',
             )}
           >
-            <FormHint className="mt-[12px] mb-[6px]">
-              Enter refund address
-            </FormHint>
-            <input
-              type="text"
-              value={refundAddress}
-              onChange={(e) => {
-                setRefundAddress(e.target.value);
-              }}
-              className={classes(
-                'w-full h-[42px] border border-black border-opacity-10 rounded-[8px]',
-                'p-[10px]',
-                clickableClasses,
-                'cursor-pointer',
-              )}
-              placeholder="0x..."
-            ></input>
-          </div>
+            Enter refund address
+            {!isRefundAddressOptional && (
+              <span className="text-red-500 ml-1">*</span>
+            )}
+          </FormHint>
+          <input
+            type="text"
+            value={refundAddress}
+            onChange={(e) => {
+              setRefundAddress(e.target.value);
+            }}
+            className={classes(
+              'w-full h-[42px] border rounded-[8px]',
+              'p-[10px]',
+              clickableClasses,
+              'cursor-pointer',
+              !isRefundAddressOptional
+                ? 'border-red-500'
+                : 'border-black border-opacity-10',
+            )}
+            placeholder="0x..."
+          ></input>
+          {!isRefundAddressOptional && (
+            <p className="text-red-500 text-sm mt-1">This field is required</p>
+          )}
         </div>
         <Button
           className="mt-[17px] sm:mt-[32px]"
           onClick={() => {
-            if (refundShare !== defaultRefundShare && !refundAddress) {
+            if (!isRefundAddressOptional && !refundAddress) {
               alert('Please enter your refund address');
               return;
             }
