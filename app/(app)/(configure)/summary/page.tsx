@@ -189,6 +189,7 @@ export default function Summary() {
                   decimals: 18,
                 },
                 rpcUrls: [constructRpcUrl().toString()],
+                blockExplorerUrls: ['https://etherscan.io'],
               };
               // do it manually with window.ethereum
               provider
