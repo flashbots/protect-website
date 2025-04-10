@@ -204,8 +204,9 @@ export default function Summary() {
                   }
                 })
                 .catch((error: any) => {
-                  if (error.code === 4001) {
-                    alert('User rejected the request in wallet.');
+                  // ignore 4001 "user rejected request" error code
+                  if (error.code !== 4001) {
+                    // MetaMask will show its own error message
                   }
                 });
             } else {
