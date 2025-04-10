@@ -204,9 +204,8 @@ export default function Summary() {
                   }
                 })
                 .catch((error: any) => {
-                  // ignore 4001 "user rejected request" error code
-                  if (error.code !== 4001) {
-                    alert(`Error ${error.code}: ${error.message}`);
+                  if (error.code === 4001) {
+                    alert('User rejected the request in wallet.');
                   }
                 });
             } else {
