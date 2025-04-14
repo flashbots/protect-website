@@ -205,7 +205,11 @@ export default function Summary() {
                 })
                 .catch((error: any) => {
                   // ignore 4001 "user rejected request" error code
-                  if (error.code !== 4001) {
+                  // ignore h is not a function error
+                  if (
+                    error.code !== 4001 &&
+                    error.message !== 'h is not a function'
+                  ) {
                     alert(`Error ${error.code}: ${error.message}`);
                   }
                 });

@@ -22,6 +22,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "allowUnreachableCode": false,
+    "sourceMap": true,
     "noFallthroughCasesInSwitch": true,
     "jsx": "preserve",
     "incremental": true,
