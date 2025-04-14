@@ -205,11 +205,12 @@ export default function Summary() {
                 })
                 .catch((error: any) => {
                   // ignore 4001 "user rejected request" error code
-                  // ignore h is not a function error
-                  if (
-                    error.code !== 4001 &&
-                    error.message !== 'h is not a function'
-                  ) {
+                  if (error.code === 4001) {
+                    // do nothing
+                  } else if (error.message.includes('is not a function')) {
+                    // network was still added
+                    setAddedToMetamask(true);
+                  } else {
                     alert(`Error ${error.code}: ${error.message}`);
                   }
                 });
