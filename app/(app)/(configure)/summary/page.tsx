@@ -205,7 +205,15 @@ export default function Summary() {
                 })
                 .catch((error: any) => {
                   // ignore 4001 "user rejected request" error code
-                  if (error.code !== 4001) {
+                  if (error.code === 4001) {
+                    // do nothing
+                  } else if (error.message.includes('is not a function')) {
+                    /**
+                     * MetaMask v12.14.2 introduced bug with switching networks. Since it succeeds, we still change the text to mark this as successful.
+                     * @see https://github.com/MetaMask/metamask-extension/issues/31464
+                     */
+                    setAddedToMetamask(true);
+                  } else {
                     alert(`Error ${error.code}: ${error.message}`);
                   }
                 });
