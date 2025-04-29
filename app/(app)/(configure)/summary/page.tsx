@@ -62,7 +62,7 @@ export default function Summary() {
     }
 
     if (projectName) {
-      rpcUrl.searchParams.append('originId', projectName);
+      rpcUrl.searchParams.append('originId', 'protect-website');
     }
 
     return rpcUrl;
