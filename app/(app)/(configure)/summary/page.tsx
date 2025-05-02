@@ -61,11 +61,11 @@ export default function Summary() {
       rpcUrl.search = urlParams || '';
     }
 
- if (projectName) {
+    if (projectName) {
       rpcUrl.searchParams.append('originId', projectName);
-    }else{
-    rpcUrl.searchParams.append('originId', 'protect-website');
-}
+    } else {
+      rpcUrl.searchParams.append('originId', 'protect-website');
+    }
 
     return rpcUrl;
   };
