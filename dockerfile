@@ -1,5 +1,5 @@
 # builder
-FROM node:21-alpine AS builder
+FROM node:23-alpine AS builder
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
@@ -7,7 +7,7 @@ COPY . .
 RUN npm run build
 
 # production
-FROM node:21-alpine
+FROM node:23-alpine
 WORKDIR /app
 COPY --from=builder /app/next.config.js ./
 COPY --from=builder /app/public ./public
