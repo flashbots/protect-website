@@ -34,6 +34,34 @@ This was built using [Next.js](https://nextjs.org/) and:
 - [`tailwindcss`](https://tailwindcss.com/) to apply formatting using standard class names
 
 
+## MEV Refund Metrics Widget
+
+The protect website displays real-time MEV and gas refund metrics in the header. This feature shows:
+
+- **Total MEV refunds** earned by Flashbots Protect users
+- **Total gas refunds** earned by Flashbots Protect users
+- Live data fetched from [Dune Analytics](https://dune.com/flashbots/flashbots-protect)
+- Responsive design that adapts to mobile and desktop viewports
+
+### Configuration
+
+The refund metrics widget can be configured in `/lib/config.ts`:
+
+```typescript
+export const config = {
+  refundMetricsApiUrl: 'https://refund-metrics-dune-api.vercel.app',
+  refundMetricsRedirectUrl: 'https://dune.com/flashbots/flashbots-protect',
+} as const;
+```
+
+### Implementation Details
+
+- **Server-side rendering**: Data is fetched on the server to prevent flash of placeholder content
+- **Caching**: Results are cached for 5 minutes using Next.js revalidation
+- **Fallback values**: Shows placeholder values (380/444) if the API is unavailable
+- **Semantic HTML**: Uses proper `<header>`, `<main>`, and `<footer>` elements
+
+
 ## Embedding the Protect Button
 
 Here is example code to embed a button with a link to this app:
