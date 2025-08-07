@@ -3,6 +3,7 @@ import { config } from '@/lib/config';
 interface MetricsData {
   totalMevRefund: number;
   totalGasRefund: number;
+  showWidget?: boolean;
 }
 
 export async function RefundMetrics() {
@@ -15,6 +16,12 @@ export async function RefundMetrics() {
     });
     if (res.ok) {
       const data: MetricsData = await res.json();
+
+      // Check feature flag
+      if (data.showWidget === false) {
+        return null;
+      }
+
       mev = Math.round(data.totalMevRefund);
       gas = Math.round(data.totalGasRefund);
     }
