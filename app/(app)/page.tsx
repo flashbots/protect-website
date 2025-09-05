@@ -1,10 +1,39 @@
+'use client';
+
 import Image from 'next/image';
 
 import { classes } from '@/lib/classes';
+import { useMainMetrics } from '@/lib/useMainMetrics';
 
 import { Button } from '../../components/buttons/Button';
 
 export default function Home() {
+  const { metrics, loading, error } = useMainMetrics();
+
+  // Helper function to format transaction count in millions
+  const formatTransactionCount = (count: number): string => {
+    const millions = Math.floor(count / 1000000);
+    return millions.toString();
+  };
+
+  // Get display values (show placeholders when loading or error)
+  const getDisplayValue = (
+    value: string | undefined,
+    placeholder: string = '...',
+  ) => {
+    if (loading) return placeholder;
+    if (error || !metrics) return placeholder;
+    return value || placeholder;
+  };
+
+  const transactionCount = getDisplayValue(
+    metrics && metrics.transactionsProcessed > 0
+      ? formatTransactionCount(metrics.transactionsProcessed)
+      : undefined,
+  );
+  const refundAmount = getDisplayValue(
+    metrics ? metrics.refundsEarned.toString() : undefined,
+  );
   return (
     <div
       className={classes(
@@ -74,9 +103,9 @@ export default function Home() {
                 Transactions&nbsp;processed
               </div>
               <div className="text-[25px] font-[500] tracking-[-0.5px] leading-[18px]">
-                <span className="hidden sm:inline opacity-80">&gt;</span>
+                <span className="hidden sm:inline opacity-80">&gt;&nbsp;</span>
                 <span className="inline sm:hidden opacity-80">Over&nbsp;</span>
-                <span className="">26&nbsp;</span>
+                <span className="">{transactionCount}&nbsp;</span>
                 <span className="opacity-80">million</span>
               </div>
             </div>
@@ -87,11 +116,13 @@ export default function Home() {
               </div>
               <div>
                 <div className="text-[25px] font-[500] tracking-[-0.5px] leading-[18px]">
-                  <span className="hidden sm:inline opacity-80">&gt;</span>
+                  <span className="hidden sm:inline opacity-80">
+                    &gt;&nbsp;
+                  </span>
                   <span className="inline sm:hidden opacity-80">
                     Over&nbsp;
                   </span>
-                  <span className="">387&nbsp;</span>
+                  <span className="">{refundAmount}&nbsp;</span>
                   <span className="opacity-80">ETH</span>
                 </div>
               </div>
