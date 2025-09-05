@@ -1,55 +1,27 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-
-import { config } from '@/lib/config';
-
-interface MetricsData {
-  totalMevRefund: number;
-  totalGasRefund: number;
-  showWidget?: boolean;
-}
+import { useRefundData } from '@/lib/useRefundData';
 
 export function RefundMetrics() {
-  const [metrics, setMetrics] = useState<{ mev: number; gas: number } | null>(
-    null,
-  );
-  const [showWidget, setShowWidget] = useState(true);
-  const [loading, setLoading] = useState(true);
+  const { data, loading, error } = useRefundData();
 
-  useEffect(() => {
-    async function fetchMetrics() {
-      try {
-        const res = await fetch(`${config.refundMetricsApiUrl}/api/metrics`);
-        if (res.ok) {
-          const data: MetricsData = await res.json();
-
-          // Check feature flag
-          if (data.showWidget === false) {
-            setShowWidget(false);
-            setLoading(false);
-            return;
-          }
-
-          setMetrics({
-            mev: Math.round(data.totalMevRefund),
-            gas: Math.round(data.totalGasRefund),
-          });
-        }
-      } catch {
-        // On error, don't show widget at all
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchMetrics();
-  }, []);
-
-  // Don't render if feature flag is false
-  if (!showWidget) {
+  // Handle feature flag - if explicitly disabled, don't show widget
+  if (data?.showWidget === false) {
     return null;
   }
+
+  // If there's an error or no data, don't show widget at all (preserving original behavior)
+  if (error || (!loading && !data)) {
+    return null;
+  }
+
+  // Prepare metrics for display
+  const metrics = data
+    ? {
+        mev: Math.round(data.totalMevRefund),
+        gas: Math.round(data.totalGasRefund),
+      }
+    : null;
 
   // Loading state - show placeholder
   if (loading) {
