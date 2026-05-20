@@ -21,6 +21,52 @@ const RPC_FLASHBOTS_NET = 'https://rpc.flashbots.net';
 const ETH_CHAIN_ID = '0x1';
 const ETH_CHAIN_NAME = 'Ethereum Mainnet';
 
+const getWalletErrorMessage = (error: unknown) => {
+  if (error instanceof Error) {
+    return error.message;
+  }
+
+  if (typeof error === 'string') {
+    return error;
+  }
+
+  if (
+    error &&
+    typeof error === 'object' &&
+    'message' in error &&
+    typeof error.message === 'string'
+  ) {
+    return error.message;
+  }
+
+  return '';
+};
+
+const getWalletErrorCode = (error: unknown) => {
+  if (
+    error &&
+    typeof error === 'object' &&
+    'code' in error &&
+    (typeof error.code === 'number' || typeof error.code === 'string')
+  ) {
+    const code = Number(error.code);
+    return Number.isNaN(code) ? undefined : code;
+  }
+
+  return undefined;
+};
+
+const isSuccessfulMetaMaskAddError = (error: unknown) => {
+  const code = getWalletErrorCode(error);
+  const message = getWalletErrorMessage(error).toLowerCase();
+
+  return (
+    message.includes('is not a function') ||
+    (code === -32602 &&
+      message.includes('may not specify default metamask chain'))
+  );
+};
+
 export default function Summary() {
   const {
     fastMode,
@@ -205,18 +251,27 @@ export default function Summary() {
                     setAddedToMetamask(true);
                   }
                 })
-                .catch((error: any) => {
+                .catch((error: unknown) => {
+                  const code = getWalletErrorCode(error);
+                  const message = getWalletErrorMessage(error);
+
                   // ignore 4001 "user rejected request" error code
-                  if (error.code === 4001) {
+                  if (code === 4001) {
                     // do nothing
-                  } else if (error.message.includes('is not a function')) {
+                  } else if (isSuccessfulMetaMaskAddError(error)) {
                     /**
-                     * MetaMask v12.14.2 introduced bug with switching networks. Since it succeeds, we still change the text to mark this as successful.
+                     * MetaMask can add the custom mainnet RPC and still reject with
+                     * a provider error. Since the wallet state succeeded, mark the
+                     * UI as successful instead of surfacing a false alert.
                      * @see https://github.com/MetaMask/metamask-extension/issues/31464
                      */
                     setAddedToMetamask(true);
                   } else {
-                    alert(`Error ${error.code}: ${error.message}`);
+                    alert(
+                      `Error ${code ?? 'unknown'}: ${
+                        message || 'Unable to add Flashbots Protect RPC.'
+                      }`,
+                    );
                   }
                 });
             } else {
